@@ -1,3 +1,4 @@
+import os
 import networkx as nx
 import numpy as np
 import random
@@ -29,9 +30,11 @@ class FairDiffusionModel():
     
 
     def data_loader(self):
-        self.SE_matrix = np.loadtxt(self.args.data_path_prefix + self.args.SE_matrix + self.args.data_path_suffix)
-        self.msg_matrix = np.loadtxt(self.args.data_path_prefix + self.args.msg_matrix + self.args.data_path_suffix)
-        with open(self.args.data_path_prefix + self.args.graph + self.args.data_path_suffix, 'r', encoding = 'utf-8') as file:
+        curr_dir = os.path.dirname(__file__)
+        self.data_path_prefix = os.path.normpath(os.path.join(curr_dir, self.args.rela_dir))
+        self.SE_matrix = np.loadtxt(self.data_path_prefix + self.args.SE_matrix + self.args.data_path_suffix)
+        self.msg_matrix = np.loadtxt(self.data_path_prefix + self.args.msg_matrix + self.args.data_path_suffix)
+        with open(self.data_path_prefix + self.args.graph + self.args.data_path_suffix, 'r', encoding = 'utf-8') as file:
             index = 0
             for line in file:
                 useridlist = line.split('</useridlist>')[0].split('<useridlist>')[-1].strip()
@@ -47,12 +50,12 @@ class FairDiffusionModel():
 
         # self.node_list = list(self.G.nodes())
 
-        with open(self.args.data_path_prefix + self.args.node_labels + self.args.data_path_suffix, 'r', encoding = 'utf-8') as file:
+        with open(self.data_path_prefix + self.args.node_labels + self.args.data_path_suffix, 'r', encoding = 'utf-8') as file:
             for line in file:
                 node, label = line.strip().split('\t')
                 self.G.nodes[node]['h_SE'] = int(label)
 
-        with open(self.args.data_path_prefix + self.args.seed_sets + self.args.data_path_suffix, 'r', encoding = 'utf-8') as file:
+        with open(self.data_path_prefix + self.args.seed_sets + self.args.data_path_suffix, 'r', encoding = 'utf-8') as file:
             for line in file:
                 seeds = ast.literal_eval(line)
                 self.seed_sets.append(seeds)
