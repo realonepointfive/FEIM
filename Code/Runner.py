@@ -38,6 +38,7 @@ class DQNRunner(object):
         self.train_info = {}
         self.train_info['ep_aver_loss'] = 0
         self.train_info['aver_step_reward'] = 0
+        self.train_info['ep_acc_rewards'] = 0
         self.train_info['ep_num_act_nodes'] = 0
         self.train_info['ep_msg_effi'] = 0
         
@@ -142,6 +143,7 @@ class DQNRunner(object):
                     next_state = None
                     self.train_info['ep_num_act_nodes'] = len(self.env.active_nodes)
                     self.train_info['ep_msg_effi'] = float(self.env.ep_msg_num)/len(self.env.active_nodes)
+                    self.train_info['ep_acc_rewards'] = train_episode_reward
                 else:
                     next_state = observation
 

@@ -236,7 +236,6 @@ class MDPEnv(FairDiffusionModel):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.scenario = kwargs["env_args"]["scenario"]
-        self.data_path_prefix = kwargs["env_args"]["data_path_prefix"]
         self.data_path_suffix = kwargs["env_args"]["data_path_suffix"]
         self.done = False
         self.num_edges_succ = []
@@ -320,10 +319,10 @@ class MDPEnv(FairDiffusionModel):
         num_msg = self.recommendation_triggered_by_an_action(action)
         if num_msg > 0:
             reward = float(1)/num_msg
-            self.epi_msg_num += num_msg
+            self.ep_msg_num += num_msg
         else:
             reward = 0
-            self.epi_msg_num += self.l
+            self.ep_msg_num += self.l
         self.search_active_nodes()
         self.search_cand_edges()
         if len(self.cand_edges) == 0:
@@ -336,7 +335,7 @@ class MDPEnv(FairDiffusionModel):
     def reset(self):
         """ Returns initial observations and states"""
         self.done = False
-        self.epi_msg_num = 0
+        self.ep_msg_num = 0
         self.spread_restart()
         self.search_active_nodes()
         self.search_cand_edges()
