@@ -51,9 +51,8 @@ class DQNRunner(object):
         # dir
         self.model_dir = self.all_args.model_dir
 
-        if self.use_wandb:
-            self.save_dir = str(wandb.run.dir)
-            self.run_dir = str(wandb.run.dir)
+        self.save_dir = str(wandb.run.dir)
+        self.run_dir = str(wandb.run.dir)
 
         # policy network
         self.policy_net = Policy(self.env.num_feats,
@@ -168,6 +167,9 @@ class DQNRunner(object):
                     break
 
             total_num_steps = (episode + 1) * self.episode_length
+
+            if (episode % self.save_interval == 0 or episode == episodes - 1):
+                torch.save(self.policy_net.state_dict(), str(self.save_dir) + "/DQN_" + str(episode) + ".pt")
 
             if episode % self.log_interval == 0:
                 end = time.time()
