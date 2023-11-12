@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from transformers import BertTokenizer
+from transformers import BertTokenizer, BertModel
 import torch
 
 curr_dir = os.path.dirname(__file__)
@@ -13,6 +13,7 @@ sentences = df.sentence.values
 print('Loading BERT tokenizer...')
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
+max_len = 0
 # For every sentence...
 for sent in sentences:
 
@@ -37,10 +38,11 @@ for sent in sentences:
     #   (4) Map tokens to their IDs.
     #   (5) Pad or truncate the sentence to `max_length`
     #   (6) Create attention masks for [PAD] tokens.
-    encoded_dict = tokenizer.encode_plus(
+    encoded_dict = tokenizer.encode(
                         sent,                      # Sentence to encode.
+                        None,
                         add_special_tokens = True, # Add '[CLS]' and '[SEP]'
-                        max_length = max_len,           # Pad & truncate all sentences.
+                        max_length = max_len,
                         pad_to_max_length = True,
                         return_attention_mask = True,   # Construct attn. masks.
                         return_tensors = 'pt',     # Return pytorch tensors.
@@ -60,3 +62,25 @@ attention_masks = torch.cat(attention_masks, dim=0)
 print('Original: ', sentences[0])
 print('Token IDs:', input_ids[0])
 print('Attention_masks', attention_masks[0])
+
+model = BertModel.from_pretrained('bert-base-uncased',
+                                  output_hidden_states = True, # Whether the model returns all hidden-states.
+                                  )
+
+# Put the model in "evaluation" mode, meaning feed-forward operation.
+model.eval()
+
+# Run the text through BERT, and collect all of the hidden states produced
+# from all 12 layers. 
+with torch.no_grad():
+
+    outputs = model(input_ids, attention_masks)
+
+    # Evaluating the model will return a different number of objects based on 
+    # how it's  configured in the `from_pretrained` call earlier. In this case, 
+    # becase we set `output_hidden_states = True`, the third item will be the 
+    # hidden states from all layers. See the documentation for more details:
+    # https://huggingface.co/transformers/model_doc/bert.html#bertmodel
+    hidden_states = outputs[2]
+
+print(hidden_states.shape)
