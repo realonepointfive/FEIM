@@ -79,11 +79,11 @@ class Worker(nn.Module):
         self.value_function = nn.Linear(action_range * k, 1)
 
     def forward(self, o, sum_g_W, reset_value_grad):
-        w = self.phi(sum_g_W)  # projection [ batch x 1 x k]
-        w = w.view(w.size(0), *(1, self.k))
-        # Worker
+        w = self.phi(sum_g_W)  
+        w = w.view(w.size(0), 1, self.k) # [batch x 1 x k]
+        o_w = o.permute(0, 2, 1) # [batch x k x a]
 
-        a = (w @ o).squeeze(1)  # [batch x a]
+        a = (w @ o_w).squeeze(1)  # [batch x a]
 
         probs = F.softmax(a, dim=1)
         
@@ -134,8 +134,8 @@ class FeudalNet(nn.Module):
         self.g_queue = []
         self.z_queue = []
         self.edge_embed = SAGE(feat_dim, hidden_dim).to(device)
-        self.worker = Worker(action_range, d, k)
-        self.manager = Manager(d, h)
+        self.worker = Worker(d, k, action_range)
+        self.manager = Manager(d, k, action_range)
         self.manager_partial_loss = nn.CosineEmbeddingLoss()
 
     def init_weights(self):

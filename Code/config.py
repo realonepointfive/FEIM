@@ -27,12 +27,28 @@ def get_config():
     parser.add_argument("--hidden_dim", type=int, default=256)
 
     # optimizer parameters
-    parser.add_argument("--lr", type=float, default=1e-4,
+    parser.add_argument("--lr", type=float, default=0.0003,
                         help='learning rate (default: 1e-4)')
 
-    # DQN parameters
+    # Algorithm parameters
     parser.add_argument("--gamma", type=float, default=0.99,
                         help='discounter factor of future rewards')
+    parser.add_argument('--alpha', type=float, default=0.8,
+                    help='intrinsic reward multiplier')
+    parser.add_argument('--gamma-worker', type=float, default=0.95,
+                    help='worker discount factor for rewards')
+    parser.add_argument('--gamma-manager', type=float, default=0.99,
+                    help='manager discount factor for rewards')
+    parser.add_argument('--tau-worker', type=float, default=1.00,
+                    help='parameter for GAE (worker only)')
+    parser.add_argument('--entropy-coef', type=float, default=0.01,
+                    help='entropy term coefficient (also called beta)')
+    parser.add_argument('--value-worker-loss-coef', type=float, default=1,
+                    help='worker value loss coefficient')
+    parser.add_argument('--value-manager-loss-coef', type=float, default=1,
+                    help='manager value loss coefficient')
+    parser.add_argument('--max-grad-norm', type=float, default=40,
+                    help='value loss coefficient')
     parser.add_argument("--eps_start", type=float, default=0.9,
                         help='the starting value of epsilon')
     parser.add_argument("--eps_end", type=float, default=0.9,
