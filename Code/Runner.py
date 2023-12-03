@@ -128,7 +128,6 @@ class DQNRunner(object):
     def run(self):
         start = time.time()
         episodes = int(self.num_env_steps) // self.episode_length
-        self.train_info['ep_num_act_nodes']
 
         for episode in range(episodes):
             # Initialize the environment and get it's state
@@ -219,7 +218,6 @@ class FuNRunner(object):
         self.ep_loss = []
         self.train_info = {}
         self.train_info['ep_aver_loss'] = 0
-        self.train_info['aver_step_reward'] = 0
         self.train_info['ep_acc_rewards'] = 0
         self.train_info['ep_num_act_nodes'] = 0
         self.train_info['ep_msg_effi'] = 0
@@ -251,12 +249,8 @@ class FuNRunner(object):
 
 
     def log_train(self, total_num_steps):
-        iter_buffer = iter(self.buffer.memory)
-        rewards = [Transition.reward.item() for Transition in iter_buffer]
-        self.train_info['aver_step_reward'] = np.mean(rewards)
         self.train_info['ep_aver_loss'] = np.mean(self.ep_loss)
         self.ep_loss = []
-        print('average_step_reward is {}.'.format(self.train_info['aver_step_reward']))
         for k, v in self.train_info.items():
             wandb.log({k: v}, step=total_num_steps)
 
@@ -264,7 +258,6 @@ class FuNRunner(object):
     def run(self):
         start = time.time()
         episodes = int(self.num_env_steps) // self.episode_length
-        self.train_info['ep_num_act_nodes']
 
         for episode in range(episodes):
             # Initialize the environment and get it's state
@@ -359,6 +352,7 @@ class FuNRunner(object):
                 + manager_loss \
                 + self.value_manager_loss_coef * value_manager_loss \
                 + self.value_worker_loss_coef * value_worker_loss
+            self.ep_loss.append(total_loss.item())
 
             total_loss.backward()
             nn.utils.clip_grad_norm_(self.policy_net.parameters(), self.max_grad_norm)
