@@ -212,7 +212,6 @@ class FuNRunner(object):
         self.value_worker_loss_coef = self.all_args.value_worker_loss_coef
         self.value_manager_loss_coef = self.all_args.value_manager_loss_coef
         self.max_grad_norm = self.all_args.max_grad_norm
-        self.optimizer = self.all_args.optimizer
 
         # log
         self.ep_loss = []
@@ -238,11 +237,9 @@ class FuNRunner(object):
         self.policy_net = Policy(self.env.num_feats,
                                  self.hidden_dim)
         self.policy_net.share_memory()
-        self.IP = [torch.zeros(self.policy_net.k, requires_grad=False) for _ in range(self.policy_net.h)]
+        self.IP = [torch.zeros(self.policy_net.k, requires_grad=False).to(self.device) for _ in range(self.policy_net.h)]
         
-        if self.optimizer is None:
-            print("no shared optimizer")
-            optimizer = optim.Adam(self.policy_net.parameters(), lr=self.all_args.lr)
+        self.optimizer = optim.Adam(self.policy_net.parameters(), lr=self.all_args.lr)
 
         if self.model_dir is not None:
             self.restore(self.model_dir)
@@ -256,13 +253,14 @@ class FuNRunner(object):
 
 
     def run(self):
-        start = time.time()
         episodes = int(self.num_env_steps) // self.episode_length
+        terminated = False
 
         for episode in range(episodes):
+            if not terminated:
+                obs = self.env.reset()
+                states_M = self.policy_net.init_state(1)
             # Initialize the environment and get it's state
-            obs = self.env.reset()
-            states_M = self.policy_net.init_state(1)
             train_episode_reward = 0
             values_worker, values_manager = [], []
             log_probs = []
@@ -271,7 +269,7 @@ class FuNRunner(object):
             manager_partial_loss = []
             for step in range(self.episode_length):
                 value_worker, value_manager, action_probs, goal, tran_grad, states_M = self.policy_net(obs, states_M)
-                m = Categorical(probs=action_probs)
+                m = Categorical(probs=action_probs[:obs[2].item()])
                 action = m.sample()
                 log_prob = m.log_prob(action)
                 entropy = -(log_prob * action_probs).sum(1, keepdim=True)
@@ -280,38 +278,32 @@ class FuNRunner(object):
                 
                 obs, reward, terminated, edge_feat = self.env.step(action)
                 self.IP.pop(0)
-                self.IP.append(edge_feat)
+                self.IP.append(torch.tensor(edge_feat).to(self.device))
                 train_episode_reward += reward
-                intrinsic_reward = self.policy_net._intrinsic_reward(self.IP)
+                IP = torch.cat(self.IP, dim=0).to(self.device)
+                intrinsic_reward = self.policy_net._intrinsic_reward(IP.unsqueeze(0))
                 intrinsic_reward = float(intrinsic_reward)
                 values_manager.append(value_manager)
                 values_worker.append(value_worker)
                 log_probs.append(log_prob)
                 rewards.append(reward)
                 intrinsic_rewards.append(intrinsic_reward)
-                done = terminated
-
-                if terminated:
-                    next_state = None
-                    states_M = self.policy_net.init_state(1)
-                    
-                    self.train_info['ep_num_act_nodes'] = len(self.env.active_nodes)
-                    self.train_info['ep_msg_effi'] = float(self.env.ep_msg_num)/len(self.env.active_nodes)
-                    self.train_info['ep_acc_rewards'] = train_episode_reward
-                else:
-                    next_state = obs
-
-                # Move to the next state
-                state = next_state
                 
-                if done:
+                if terminated:
                     break
-             
-            # The policy and the value function are updated after every t_max actions or when a terminal state is reached
-            R_worker = torch.zeros(1, 1)
-            R_manager = torch.zeros(1, 1)
-            if not done:
-               value_worker, value_manager, _, _, _, _ = self.policy_net(state, states_M) # Bootstrap from last state
+ 
+            self.train_info['ep_num_act_nodes'] = len(self.env.active_nodes)
+            self.train_info['ep_msg_effi'] = float(self.env.ep_msg_num)/len(self.env.active_nodes)
+            self.train_info['ep_acc_rewards'] = train_episode_reward
+            
+            if terminated:
+                obs = self.env.reset()
+                states_M = self.policy_net.init_state(1)
+                R_worker = torch.zeros(1, 1).to(self.device)
+                R_manager = torch.zeros(1, 1).to(self.device)
+            # The policy and the value function are updated after every t_max actions or when a terminal state is reaches
+            else:
+               value_worker, value_manager, _, _, _, _ = self.policy_net(obs, states_M) # Bootstrap from last state
                R_worker = value_worker.data
                R_manager = value_manager.data
                 
@@ -321,7 +313,7 @@ class FuNRunner(object):
             manager_loss = 0
             value_manager_loss = 0
             value_worker_loss = 0
-            gae_worker = torch.zeros(1, 1)
+            gae_worker = torch.zeros(1, 1).to(self.device)
             for i in reversed(range(len(rewards))):
                 R_worker = self.gamma_worker * R_worker + rewards[i] + self.alpha * intrinsic_rewards[i]
                 R_manager = self.gamma_manager * R_manager + rewards[i]
@@ -364,7 +356,6 @@ class FuNRunner(object):
                 torch.save(self.policy_net.state_dict(), str(self.save_dir) + "/FuN_" + str(episode) + ".pt")
 
             if episode % self.log_interval == 0:
-                end = time.time()
                 print("\n Scenario {} Algo {} Exp {} updates {}/{} episodes, total num timesteps {}/{}.\n"
                         .format(self.all_args.scenario,
                                 self.algorithm_name,
