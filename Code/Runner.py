@@ -6,6 +6,7 @@ import random
 from functools import reduce
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import torch.optim as optim
 from torch.distributions import Categorical
 from torch.autograd import Variable
@@ -40,7 +41,6 @@ class DQNRunner(object):
         self.ep_loss = []
         self.train_info = {}
         self.train_info['ep_aver_loss'] = 0
-        self.train_info['aver_step_reward'] = 0
         self.train_info['ep_acc_rewards'] = 0
         self.train_info['ep_num_act_nodes'] = 0
         self.train_info['ep_msg_effi'] = 0
@@ -85,12 +85,8 @@ class DQNRunner(object):
 
 
     def log_train(self, total_num_steps):
-        iter_buffer = iter(self.buffer.memory)
-        rewards = [Transition.reward.item() for Transition in iter_buffer]
-        self.train_info['aver_step_reward'] = np.mean(rewards)
         self.train_info['ep_aver_loss'] = np.mean(self.ep_loss)
         self.ep_loss = []
-        print('average_step_reward is {}.'.format(self.train_info['aver_step_reward']))
         for k, v in self.train_info.items():
             wandb.log({k: v}, step=total_num_steps)
 
@@ -135,7 +131,7 @@ class DQNRunner(object):
             train_episode_reward = 0
             for step in range(self.episode_length):
                 action = self.select_action(state, step).to(self.device)
-                observation, reward, terminated = self.env.step(action)
+                observation, reward, terminated, _ = self.env.step(action)
                 train_episode_reward += reward
                 reward = torch.tensor([reward], device=self.device)
                 done = terminated
@@ -215,6 +211,9 @@ class FuNRunner(object):
 
         # log
         self.ep_loss = []
+        self.ep_acc_rewards = []
+        self.ep_num_act_nodes = []
+        self.ep_msg_effi = []
         self.train_info = {}
         self.train_info['ep_aver_loss'] = 0
         self.train_info['ep_acc_rewards'] = 0
@@ -247,7 +246,13 @@ class FuNRunner(object):
 
     def log_train(self, total_num_steps):
         self.train_info['ep_aver_loss'] = np.mean(self.ep_loss)
+        self.train_info['ep_num_act_nodes'] = np.mean(self.ep_num_act_nodes)
+        self.train_info['ep_msg_effi'] = np.mean(self.ep_msg_effi)
+        self.train_info['ep_acc_rewards'] = np.mean(self.ep_acc_rewards)
+        self.ep_num_act_nodes = []
         self.ep_loss = []
+        self.ep_msg_effi = []
+        self.ep_acc_rewards = []
         for k, v in self.train_info.items():
             wandb.log({k: v}, step=total_num_steps)
 
@@ -268,8 +273,9 @@ class FuNRunner(object):
             entropies = []  # regularisation
             manager_partial_loss = []
             for step in range(self.episode_length):
-                value_worker, value_manager, action_probs, goal, tran_grad, states_M = self.policy_net(obs, states_M)
-                m = Categorical(probs=action_probs[:obs[2].item()])
+                value_worker, value_manager, action_values, goal, tran_grad, states_M = self.policy_net(obs, states_M)
+                action_probs = F.softmax(action_values[:, :obs[2].item()], dim=1).to(self.device)
+                m = Categorical(probs=action_probs)
                 action = m.sample()
                 log_prob = m.log_prob(action)
                 entropy = -(log_prob * action_probs).sum(1, keepdim=True)
@@ -292,9 +298,9 @@ class FuNRunner(object):
                 if terminated:
                     break
  
-            self.train_info['ep_num_act_nodes'] = len(self.env.active_nodes)
-            self.train_info['ep_msg_effi'] = float(self.env.ep_msg_num)/len(self.env.active_nodes)
-            self.train_info['ep_acc_rewards'] = train_episode_reward
+            self.ep_num_act_nodes.append(len(self.env.active_nodes))
+            self.ep_msg_effi.append(float(self.env.ep_msg_num)/len(self.env.active_nodes))
+            self.ep_acc_rewards.append(self.train_episode_reward)
             
             if terminated:
                 obs = self.env.reset()
@@ -304,8 +310,8 @@ class FuNRunner(object):
             # The policy and the value function are updated after every t_max actions or when a terminal state is reaches
             else:
                value_worker, value_manager, _, _, _, _ = self.policy_net(obs, states_M) # Bootstrap from last state
-               R_worker = value_worker.data
-               R_manager = value_manager.data
+               R_worker = value_worker
+               R_manager = value_manager
                 
             values_worker.append(Variable(R_worker))
             values_manager.append(Variable(R_manager))
