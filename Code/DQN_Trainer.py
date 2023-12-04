@@ -10,7 +10,7 @@ import argparse
 
 sys.path.append("../../")
 from Fair_Diffusion_Model import MDPEnv
-from Runner import DQNRunner as Runner
+from DQN_Runner import DQNRunner as Runner
 from config import get_config
 
 
