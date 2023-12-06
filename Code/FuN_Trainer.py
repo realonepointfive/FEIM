@@ -22,13 +22,13 @@ def make_train_env(all_args):
                         "obs_limit": 1000,
                         "feats_num": 50,
                         "neighbours_num": [5, 5],
-                        "rela_dir": "../Dataset/Flood_input_data/",
+                        "rela_dir": "../Dataset/Flood_input_data/Flood512to521SG/",
                         "data_path_suffix": ".txt",
-                        "graph": "/Flood512to521SVD",
+                        "graph": "/Msg",
                         "node_labels": "/node_labels",
-                        "seed_sets": "/random_seeds",
-                        "SE_matrix": "/SE_matrix",
-                        "msg_matrix": "/msg_matrix"}
+                        "seed_sets": "/Top10Seeds",
+                        "SE_matrix": "/SE522to528SVD",
+                        "msg_matrix": "/MsgSVD"}
 
             env = MDPEnv(env_args=env_args)
         else:
@@ -46,13 +46,13 @@ def make_eval_env(all_args):
                         "obs_limit": 1000,
                         "feats_num": 50,
                         "neighbours_num": [5, 5],
-                        "rela_dir": "../Dataset/Flood_input_data/",
+                        "rela_dir": "../Dataset/Flood_input_data/Flood512to521SG/",
                         "data_path_suffix": ".txt",
-                        "graph": "/Flood512to521SVD",
+                        "graph": "/Msg",
                         "node_labels": "/node_labels",
-                        "seed_sets": "/random_seeds",
-                        "SE_matrix": "/SE_matrix",
-                        "msg_matrix": "/msg_matrix"}
+                        "seed_sets": "/Top10Seeds",
+                        "SE_matrix": "/SE522to528SVD",
+                        "msg_matrix": "/MsgSVD"}
 
             env = MDPEnv(env_args=env_args)
         else:
