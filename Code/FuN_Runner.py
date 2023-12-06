@@ -33,6 +33,7 @@ class FuNRunner(object):
         self.num_env_steps = self.all_args.num_env_steps
         self.episode_length = self.all_args.episode_length
         self.num_episodes = self.all_args.num_episodes
+        self.eval_episodes = self.all_args.eval_episodes
         self.hidden_dim = self.all_args.hidden_dim
         self.use_wandb = self.all_args.use_wandb
         self.tau_worker = self.all_args.tau
@@ -54,6 +55,10 @@ class FuNRunner(object):
         self.train_info['ep_acc_rewards'] = 0
         self.train_info['ep_num_act_nodes'] = 0
         self.train_info['ep_msg_effi'] = 0
+        self.eval_info = {}
+        self.eval_info['ep_acc_rewards'] = 0
+        self.eval_info['ep_num_act_nodes'] = 0
+        self.eval_info['ep_msg_effi'] = 0
         
         # interval
         self.save_interval = self.all_args.save_interval
@@ -70,7 +75,7 @@ class FuNRunner(object):
         # Feudal network
         self.policy_net = Policy(self.env.num_feats,
                                  self.hidden_dim)
-        self.policy_net.share_memory()
+        # self.policy_net.share_memory()
         self.IP = [torch.zeros(self.policy_net.k, requires_grad=False).to(self.device) for _ in range(self.policy_net.h)]
         
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=self.all_args.lr)
@@ -89,6 +94,17 @@ class FuNRunner(object):
         self.ep_msg_effi = []
         self.ep_acc_rewards = []
         for k, v in self.train_info.items():
+            wandb.log({k: v}, step=total_num_steps)
+            
+    
+    def log_eval(self, total_num_steps):
+        self.eval_info['ep_num_act_nodes'] = np.mean(self.ep_num_act_nodes)
+        self.eval_info['ep_msg_effi'] = np.mean(self.ep_msg_effi)
+        self.eval_info['ep_acc_rewards'] = np.mean(self.ep_acc_rewards)
+        self.ep_num_act_nodes = []
+        self.ep_msg_effi = []
+        self.ep_acc_rewards = []
+        for k, v in self.eval_info.items():
             wandb.log({k: v}, step=total_num_steps)
 
 
@@ -206,5 +222,43 @@ class FuNRunner(object):
                                 total_num_steps,
                                 self.num_env_steps)) 
                 
-                self.log_train(total_num_steps)   
+                self.log_train(total_num_steps)
+       
                 
+    @torch.no_grad()
+    def eval(self):
+        self.policy_net.load_state_dict(self.model_dir)
+        self.policy_net.eval()
+        terminated = False
+
+        for episode in range(self.eval_episodes):
+            if not terminated:
+                obs = self.env.reset()
+                states_M = self.policy_net.init_state(1)
+            # Initialize the environment and get it's state
+            eval_episode_reward = 0
+            for step in range(self.episode_length):
+                _, _, action_values, _, _, states_M = self.policy_net(obs, states_M)
+                action_probs = F.softmax(action_values[:, :obs[2].item()], dim=1)
+                action = action_probs.max(1, keepdim=True)[1]
+                
+                obs, reward, terminated, _ = self.env.step(action)
+                eval_episode_reward += reward
+                
+                if terminated:
+                    break
+ 
+            self.ep_num_act_nodes.append(len(self.env.active_nodes))
+            self.ep_msg_effi.append(float(self.env.ep_msg_num)/len(self.env.active_nodes))
+            self.ep_acc_rewards.append(eval_episode_reward)
+            
+            if terminated:
+                self.env.results_recording()
+                obs = self.env.reset()
+                states_M = self.policy_net.init_state(1)
+
+            total_num_steps = (episode + 1) * self.episode_length
+        
+        
+        self.log_eval(total_num_steps)
+        self.env.results_reservation()
