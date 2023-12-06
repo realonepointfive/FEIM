@@ -14,6 +14,8 @@ import wandb
 from Algorithm import FeudalNet as Policy
 from ExperienceReplay import Transition, ReplayMemory
 from itertools import count
+from pathlib import Path
+import os
 
 def _t2n(x):
     return x.detach().cpu().numpy()
@@ -67,7 +69,8 @@ class FuNRunner(object):
         self.log_interval = self.all_args.log_interval
 
         # dir
-        self.model_dir = self.all_args.model_dir
+        self.model_dir = Path(os.path.split(os.path.dirname(os.path.abspath(__file__)))[
+                       0] + "/results") / self.all_args.env_name / self.all_args.scenario / self.all_args.algorithm_name / self.all_args.experiment_name
 
         self.save_dir = str(wandb.run.dir)
         self.run_dir = str(wandb.run.dir)
@@ -227,7 +230,7 @@ class FuNRunner(object):
                 
     @torch.no_grad()
     def eval(self):
-        self.policy_net.load_state_dict(self.model_dir)
+        self.policy_net.load_state_dict(self.model_dir + '/wandb/run20231204/FuN_700.pt')
         self.policy_net.eval()
         terminated = False
 
