@@ -52,6 +52,9 @@ class FuNRunner(object):
         self.ep_acc_rewards = []
         self.ep_num_act_nodes = []
         self.ep_msg_effi = []
+        self.acc_rewards = []
+        self.num_act_nodes = []
+        self.msg_effi = []
         self.train_info = {}
         self.train_info['ep_aver_loss'] = 0
         self.train_info['ep_acc_rewards'] = 0
@@ -70,7 +73,7 @@ class FuNRunner(object):
 
         # dir
         self.model_dir = Path(os.path.split(os.path.dirname(os.path.abspath(__file__)))[
-                       0] + "/results") / self.all_args.env_name / self.all_args.scenario / self.all_args.algorithm_name / self.all_args.experiment_name
+                       0] + "/results") / self.all_args.env_name / self.all_args.scenario / self.all_args.algorithm_name / self.all_args.experiment_name / 'wandb/run20231204/files/FuN_700.pt'
 
         self.save_dir = str(wandb.run.dir)
         self.run_dir = str(wandb.run.dir)
@@ -83,15 +86,19 @@ class FuNRunner(object):
         
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=self.all_args.lr)
 
+        '''
         if self.model_dir is not None:
             self.restore(self.model_dir)
-
+        '''
 
     def log_train(self, total_num_steps):
         self.train_info['ep_aver_loss'] = np.mean(self.ep_loss)
         self.train_info['ep_num_act_nodes'] = np.mean(self.ep_num_act_nodes)
         self.train_info['ep_msg_effi'] = np.mean(self.ep_msg_effi)
         self.train_info['ep_acc_rewards'] = np.mean(self.ep_acc_rewards)
+        self.num_act_nodes.append(self.train_info['ep_num_act_nodes'])
+        self.msg_effi.append(self.train_info['ep_msg_effi'])
+        self.acc_rewards.append(self.train_info['ep_acc_rewards'])
         self.ep_num_act_nodes = []
         self.ep_loss = []
         self.ep_msg_effi = []
@@ -212,8 +219,17 @@ class FuNRunner(object):
 
             total_num_steps = (episode + 1) * self.episode_length
 
-            if (episode % self.save_interval == 0 or episode == episodes - 1):
+            if episode % self.save_interval == 0:
                 torch.save(self.policy_net.state_dict(), str(self.save_dir) + "/FuN_" + str(episode) + ".pt")
+
+            if episode == episodes - 1:
+                torch.save(self.policy_net.state_dict(), str(self.save_dir) + "/FuN_" + str(episode) + ".pt")
+                num_act_nodes = np.array(self.num_act_nodes)
+                msg_effi = np.array(self.msg_effi)
+                acc_rewards = np.array(self.acc_rewards)
+                np.savetxt(str(self.save_dir) + '/num_act_nodes.txt', num_act_nodes, fmt='%d')
+                np.savetxt(str(self.save_dir) + '/msg_effi.txt', msg_effi, fmt='%f')
+                np.savetxt(str(self.save_dir) + '/acc_rewards.txt', acc_rewards, fmt='%f')
 
             if episode % self.log_interval == 0:
                 print("\n Scenario {} Algo {} Exp {} updates {}/{} episodes, total num timesteps {}/{}.\n"
@@ -230,7 +246,8 @@ class FuNRunner(object):
                 
     @torch.no_grad()
     def eval(self):
-        self.policy_net.load_state_dict(self.model_dir + '/wandb/run20231204/FuN_700.pt')
+        policy_net_state_dict = torch.load(self.model_dir)
+        self.policy_net.load_state_dict(policy_net_state_dict)
         self.policy_net.eval()
         terminated = False
 
