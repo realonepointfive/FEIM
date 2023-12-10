@@ -42,6 +42,9 @@ class DQNRunner(object):
         self.ep_acc_rewards = []
         self.ep_num_act_nodes = []
         self.ep_msg_effi = []
+        self.acc_rewards = []
+        self.num_act_nodes = []
+        self.msg_effi = []
         self.train_info = {}
         self.train_info['ep_aver_loss'] = 0
         self.train_info['ep_acc_rewards'] = 0
@@ -78,6 +81,7 @@ class DQNRunner(object):
 
 
     def select_action(self, state, step):
+        '''
         sample = random.random()
         eps_threshold = self.all_args.eps_end + (self.all_args.eps_start - self.all_args.eps_end) * math.exp(-1. * step / self.all_args.eps_decay)
         if sample > eps_threshold:
@@ -85,6 +89,12 @@ class DQNRunner(object):
                 return self.policy_net(state)[0][:state[2].item()].view(1, state[2].item()).max(1)[1].view(1, 1)
         else:
             return torch.tensor(random.randint(0, state[2].item() - 1)).view(1, 1)
+        '''
+        action_values = self.policy_net(state)
+        action_probs = F.softmax(action_values[:, :state[2].item()], dim=1).to(self.device)
+        m = Categorical(probs=action_probs)
+        action = m.sample().view(1, 1)
+        return action
 
 
     def log_train(self, total_num_steps):
@@ -92,6 +102,9 @@ class DQNRunner(object):
         self.train_info['ep_num_act_nodes'] = np.mean(self.ep_num_act_nodes)
         self.train_info['ep_msg_effi'] = np.mean(self.ep_msg_effi)
         self.train_info['ep_acc_rewards'] = np.mean(self.ep_acc_rewards)
+        self.num_act_nodes.append(self.train_info['ep_num_act_nodes'])
+        self.msg_effi.append(self.train_info['ep_msg_effi'])
+        self.acc_rewards.append(self.train_info['ep_acc_rewards'])
         self.ep_num_act_nodes = []
         self.ep_loss = []
         self.ep_msg_effi = []
@@ -175,8 +188,17 @@ class DQNRunner(object):
 
             total_num_steps = (episode + 1) * self.episode_length
 
-            if (episode % self.save_interval == 0 or episode == episodes - 1):
+            if episode % self.save_interval == 0:
                 torch.save(self.policy_net.state_dict(), str(self.save_dir) + "/DQN_" + str(episode) + ".pt")
+
+            if episode == episodes - 1:
+                torch.save(self.policy_net.state_dict(), str(self.save_dir) + "/DQN_" + str(episode) + ".pt")
+                num_act_nodes = np.array(self.num_act_nodes)
+                msg_effi = np.array(self.msg_effi)
+                acc_rewards = np.array(self.acc_rewards)
+                np.savetxt(str(self.save_dir) + '/num_act_nodes.txt', num_act_nodes, fmt='%d')
+                np.savetxt(str(self.save_dir) + '/msg_effi.txt', msg_effi, fmt='%f')
+                np.savetxt(str(self.save_dir) + '/acc_rewards.txt', acc_rewards, fmt='%f')
 
             if episode % self.log_interval == 0:
                 end = time.time()
