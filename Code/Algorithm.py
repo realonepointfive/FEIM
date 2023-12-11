@@ -5,7 +5,7 @@ import torch.nn.init as init
 from torch_geometric.nn import SAGEConv
 
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 
 
 class SAGE(torch.nn.Module):
@@ -71,28 +71,33 @@ class Worker(nn.Module):
     def __init__(self, d, k, action_range):
         super(Worker, self).__init__()
         self.k = k
+        self.action_range = action_range
+        self.f_Wspace = nn.Linear(d, k)
 
-        self.phi = nn.Sequential(
+        self.g = nn.Sequential(
             nn.Linear(d, k, bias=False),
         )
         
         self.value_function = nn.Linear(action_range * k, 1)
+        self.worker_partial_loss = nn.CosineEmbeddingLoss(reduction='none').to(device)
 
-    def forward(self, o, sum_g_W, reset_value_grad):
-        w = self.phi(sum_g_W)  
-        w = w.view(w.size(0), 1, self.k) # [batch x 1 x k]
-        o_w = o.permute(0, 2, 1) # [batch x k x a]
-
-        a = (w @ o_w).squeeze(1)  # [batch x a]
-
-        probs = F.softmax(a, dim=1)
-        
+    def forward(self, o, sum_g_W, sim_thre, reset_value_grad):
+        w = self.f_Wspace(sum_g_W) # [batch x k]
+        a_flat = o.view(-1, self.action_range * self.k)
+        a_w = o.squeeze(0) # [a x k]
+        action_values = self.worker_partial_loss(a_w, w, - torch.ones(w.size(0)).to(device)) # [a]
+        action_values.unsqueeze(0) # [batch x a]
+        work_range = torch.sum(action_values >= sim_thre)
         if reset_value_grad:
-            value = self.value_function(reset_grad2(o))
+            value = self.value_function(reset_grad2(a_flat))
         else:
-            value = self.value_function(o)
+            value = self.value_function(a_flat)
 
-        return value, probs
+        return value, action_values, work_range
+    
+    def reset_states_grad(self, states_W):
+        hx, cx = states_W
+        return list(map(reset_grad2, hx)), list(map(reset_grad2, cx))
 
 
 class Manager(nn.Module):
@@ -111,7 +116,7 @@ class Manager(nn.Module):
     def forward(self, o, states_M, reset_value_grad):
         # action_range * 50
         z = self.f_Mspace(o)  # action_range * 200
-        g_hat, states_M = self.f_Mrnn(z, states_M)
+        g_hat, cx = states_M = self.f_Mrnn(z, states_M)
 
         g = F.normalize(g_hat)
         
@@ -133,10 +138,12 @@ class FeudalNet(nn.Module):
         self.d, self.k, self.h, self.action_range = d, k, h, action_range
         self.g_queue = []
         self.z_queue = []
+        self.a_range = []
+        self.w_range = []
         self.edge_embed = SAGE(feat_dim, hidden_dim).to(device)
-        self.worker = Worker(d, k, action_range)
-        self.manager = Manager(d, k, action_range)
-        self.manager_partial_loss = nn.CosineEmbeddingLoss()
+        self.worker = Worker(d, k, action_range).to(device)
+        self.manager = Manager(d, k, action_range).to(device)
+        self.manager_partial_loss = nn.CosineEmbeddingLoss().to(device)
 
     def init_weights(self):
         """all submodules are already initialized like this"""
@@ -147,21 +154,23 @@ class FeudalNet(nn.Module):
                     m.reset_parameters()
         self.apply(default_init)
 
-    def forward(self, states, states_M, reset_value_grad=False):
+    def forward(self, states, states_M, states_W, reset_value_grad=False):
         o_batch = torch.empty((0, self.action_range, self.k), device=device)
         edge_feat = states[0]
         edge_index = states[1]
         action_range = states[2]
+
         o = self.edge_embed(edge_feat.to(device), edge_index.to(device))[:action_range].to(device)
         num_rows_to_add = self.action_range - action_range
         zeros_to_add = torch.zeros((num_rows_to_add, self.k), device=device)
         expanded_o = torch.cat((o, zeros_to_add), dim=0)
         o_batch = torch.cat((o_batch, expanded_o.unsqueeze(0)), dim=0)
 
-        value_manager, g, z, states_M = self.manager(o_batch.view(-1, action_range * self.k), states_M, reset_value_grad)
+        value_manager, g, z, states_M = self.manager(o_batch.view(-1, self.action_range * self.k), states_M, reset_value_grad)
         z_prev = self.z_queue[0]
         g_prev = self.g_queue[0]
-        tran_grad = self.manager_partial_loss((z - z_prev), g_prev, - torch.ones(g_prev.size(0)))
+        sim_thre = self.manager_partial_loss((z - z_prev), g_prev, - torch.ones(g_prev.size(0)).to(device))
+        
         self.g_queue.pop(0)
         self.g_queue.append(g)
         self.z_queue.pop(0)
@@ -170,22 +179,33 @@ class FeudalNet(nn.Module):
         g_W = torch.stack(self.g_queue, dim=0)
         # sum on h different gt values, note that gt = normalize(hx)
         sum_goal = sum(map(F.normalize, g_W))
-        sum_goal_W = reset_grad2(sum_goal, requires_grad=self.training)
+        sum_goal_W = reset_grad2(sum_goal, requires_grad=True)
 
-        value_worker, action_probs = self.worker(o_batch, sum_goal_W, reset_value_grad)
+        value_worker, action_values, work_range = self.worker(o_batch, sum_goal_W, sim_thre, reset_value_grad)
+        w_range = torch.stack(self.w_range, dim=0)
+        a_range = torch.stack(self.a_range, dim=0)
+        tran_grad = torch.log(torch.prod(w_range/a_range))
+        self.a_range.pop(0)
+        self.a_range.append(action_range)
+        self.w_range.pop(0)
+        self.w_range.append(work_range)
 
-        return value_worker, value_manager, action_probs, g, tran_grad, states_M
+        return value_worker, value_manager, action_values, g, tran_grad, states_M
 
     def init_state(self, batch_size):
-        self.z_queue = [torch.zeros(batch_size, self.d, requires_grad=False) for _ in range(self.h)]
-        self.g_queue = [torch.zeros(batch_size, self.d, requires_grad=False) for _ in range(self.h)]
-        return (torch.zeros(batch_size, self.d), torch.zeros(batch_size, self.d))
+        self.z_queue = [torch.zeros(batch_size, self.d, requires_grad=False).to(device) for _ in range(self.h)]
+        self.g_queue = [torch.zeros(batch_size, self.d, requires_grad=False).to(device) for _ in range(self.h)]
+        self.a_range = [torch.tensor(1).to(device) for _ in range(self.h)]
+        self.w_range = [torch.tensor(1).to(device) for _ in range(self.h)]
+        states_M = (torch.zeros(batch_size, self.d).to(device), torch.zeros(batch_size, self.d).to(device))
+        return states_M
 
     def reset_states_grad(self, states_M):
         return self.manager.reset_states_grad(states_M)
 
     def _intrinsic_reward(self, influence_path):
-        rI = torch.tensor(0)
+        rI = torch.zeros(1, 1).to(device)
         for i in range(self.h):
-            rI += F.cosine_similarity(influence_path, self.g_queue[i])
+            g_i = F.normalize(self.g_queue[i]) 
+            rI += F.cosine_similarity(influence_path, g_i)
         return rI / self.h
