@@ -173,54 +173,22 @@ class FairDiffusionModel():
         three_hop_msg_s = []
         three_hop_msg_r = []
         adj_list = []
-        if neigh_d == 1:
-            for node in input_nodes:
-                for one_hop_node in self.sg.neighbors(node):
-                    if self.sg.nodes[one_hop_node]['active'] == False and self.sg.nodes[one_hop_node]['abandoned'] == False:
-                        one_hop_msg_s.append(nodes_dict[one_hop_node])
-                        one_hop_msg_r.append(nodes_dict[node])
-            msg_s = one_hop_msg_s
-            msg_r = one_hop_msg_r
-        elif neigh_d == 2:
-            for node in input_nodes:
-                one_hop_neigh = []
-                for one_hop_node in self.sg.neighbors(node):
-                    if self.sg.nodes[one_hop_node]['active'] == False and self.sg.nodes[one_hop_node]['abandoned'] == False:
-                        one_hop_neigh.append(one_hop_node)
-                        one_hop_msg_s.append(nodes_dict[one_hop_node])
-                        one_hop_msg_r.append(nodes_dict[node])
-                for one_hop_node in one_hop_neigh:
-                    for two_hop_node in self.sg.neighbors(one_hop_node):
-                        if self.sg.nodes[two_hop_node]['active'] == False and self.sg.nodes[two_hop_node]['abandoned'] == False:
-                            if two_hop_node not in one_hop_neigh and two_hop_node != node:
-                                two_hop_msg_s.append(nodes_dict[two_hop_node])
-                                two_hop_msg_r.append(nodes_dict[one_hop_node])
-            msg_s = one_hop_msg_s + two_hop_msg_s
-            msg_r = one_hop_msg_r + two_hop_msg_r
-        else:
-            for node in input_nodes:
-                one_hop_neigh = []
-                two_hop_neigh = []
-                for one_hop_node in self.sg.neighbors(node):
-                    if self.sg.nodes[one_hop_node]['active'] == False and self.sg.nodes[one_hop_node]['abandoned'] == False:
-                        one_hop_neigh.append(one_hop_node)
-                        one_hop_msg_s.append(nodes_dict[one_hop_node])
-                        one_hop_msg_r.append(nodes_dict[node])
-                for one_hop_node in one_hop_neigh:
-                    for two_hop_node in self.sg.neighbors(one_hop_node):
-                        if self.sg.nodes[two_hop_node]['active'] == False and self.sg.nodes[two_hop_node]['abandoned'] == False:
-                            if two_hop_node not in one_hop_neigh and two_hop_node != node:
-                                two_hop_neigh.append(two_hop_node)
-                                two_hop_msg_s.append(nodes_dict[two_hop_node])
-                                two_hop_msg_r.append(nodes_dict[one_hop_node])
-                for two_hop_node in two_hop_neigh:
-                    for three_hop_node in self.sg.neighbors(two_hop_node):
-                        if self.sg.nodes[three_hop_node]['active'] == False and self.sg.nodes[three_hop_node]['abandoned'] == False:
-                            if three_hop_node not in one_hop_neigh and three_hop_node not in two_hop_neigh and three_hop_node != node:
-                                three_hop_msg_s.append(nodes_dict[three_hop_node])
-                                three_hop_msg_r.append(nodes_dict[two_hop_node])
-            msg_s = one_hop_msg_s + two_hop_msg_s + three_hop_msg_s
-            msg_r = one_hop_msg_r + two_hop_msg_r + three_hop_msg_r
+            
+        for node in input_nodes:
+            one_hop_neigh = []
+            for one_hop_node in self.sg.neighbors(node):
+                if self.sg.nodes[one_hop_node]['active'] == False and self.sg.nodes[one_hop_node]['abandoned'] == False:
+                    one_hop_neigh.append(one_hop_node)
+                    one_hop_msg_s.append(nodes_dict[one_hop_node])
+                    one_hop_msg_r.append(nodes_dict[node])
+            for one_hop_node in one_hop_neigh:
+                for two_hop_node in self.sg.neighbors(one_hop_node):
+                    if self.sg.nodes[two_hop_node]['active'] == False and self.sg.nodes[two_hop_node]['abandoned'] == False:
+                        if two_hop_node not in one_hop_neigh and two_hop_node != node:
+                            two_hop_msg_s.append(nodes_dict[two_hop_node])
+                            two_hop_msg_r.append(nodes_dict[one_hop_node])
+        msg_s = one_hop_msg_s + two_hop_msg_s
+        msg_r = one_hop_msg_r + two_hop_msg_r
 
         adj_list.append(msg_s)
         adj_list.append(msg_r)
