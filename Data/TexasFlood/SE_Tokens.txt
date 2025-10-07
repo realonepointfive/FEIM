@@ -1,0 +1,541 @@
+['or', '##w', '##x', 'strong', 'thunder', '##storm', 'miles', 'north', 'banks', 'miles', 'south', 'vernon', '##ia', 'storm', 'moving', 'sw']	1432256410659
+['wa', '##w', '##x', 'strong', 'thunder', '##storm', '11', 'miles', 'east', 'ac', '##me', 'moving', 'nw', 'mph', 'hail', 'size', 'penn', '##ies']	1432258453666
+['the', '##fl', '##ash', 'flash', 'flash', 'flood', 'watch', 'canceled', 'dozens', 'low', 'water', 'crossings', 'closed', 'usa']	1432260073659
+['pd', '##xt', '##st', 'or', '##w', '##x', 'big', 'time', 'rain', 'falling', 'forest', 'grove', 'watch', 'localized', 'flooding', 'roads', 'storm', 'drains']	1432260852660
+['deals', '44', 'inch', '240', '##w', 'led', 'flood', '##light', 'work', 'light', 'driving', 'light', '##12', '##49', '##9', '156', '##24', '40']	1432287218658
+['wal', '##ml', '##ey', 'weather', 'te', '##mp', '176', '##c', 'wind', '40', '##kt', '##s', 'rain', 'today', '00', '##mm', 'bar', '##ometer', 'falling', 'slowly', '102', '##43', '##mb', 'for', '##cast', 'fairly', 'fine', 'shower', '##y']	1432292393662
+['hello', '##mal', '##aw', '##i', 'hope', 'kenya', 'learns', 'floods', 'malawi', 'heavy', 'rain']	1432300098661
+['the', '##fl', '##ash', 'flash', 'flash', 'flood', 'watch', 'canceled', 'dozens', 'low', 'water', 'crossings', 'closed', '86', '##3']	1432302037662
+['climate', '##chang', '##e', 'takes', '##ides', '20', '##k', 'nyc', 'residents', 'live', 'high', '##ris', '##k', 'flood', 'areas']	1432302868665
+['home', '##tov', '##ote', 'people', 'airport', 'floods', 'feel', 'irish', 'rig']	1432305097663
+['weather', '##sy', '##d', '##ney', 'weather', 'sydney', 'vivid', 'sydney', 'slow', 'start', 'wet', 'weather', 'pe', '##op', 'h', '##tt']	1432305617657
+['y', '##x', '##e', 'sp', '##ne', '##ws', 'news', 'flood', 'hotels', 'concerns', 'tourism', 'agency']	1432306887665
+['birmingham', 'weather', 'te', '##mp', '##16', '##1', '##c', 'humid', '##75', 'pre', '##s', '##10', '##23', '##hp', '##a', 'steady', 'conditions', 'cloudy', 'wind', '##ea', '##st', '35', '##km', '##h']	1432321134663
+['tech', 'weather', 'whip', '##lash', 'texas', 'extreme', 'drought', 'floods', 'weeks']	1432328924663
+['app', 'weather', 'ph', '##uke', '##t', '##weather', 'ph', '##uke', '##t', 'weather', 'forecast', 'sat', '23', 'light', 'rain', 'sun', 'app', 'weather', '##cu', '##be']	1432333478664
+['ot', '##own', 'per', '##fe', '##kt', '##storm', 'q', '##6', 'july', '##4th', 'orlando', 'ass', 'ni', '##gga', '##s', 'rep', '##pin', 'hard']	1432349382664
+['deals', 'cars', '2', '##x', '18', '##w', 'led', 'flood', 'fog', 'driving', 'work', 'light', 'lamp', 'truck', 'roof', 'bar', 'off', '##ro', '##ad', '4', '##x']	1432353798664
+['tornadoes', 'super', '##cel', '##ls', 'tomorrow', 'afternoon', 'ok', '##t', '##x', 'pan', '##hand', '##les']	1432373873665
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'armstrong', 'carson', 'potter', 'randall', 'counties']	1432375952660
+['ph', '##w', '##x', 'flash', 'flood', 'warning', 'potter', 'randall', 'deaf', 'smith', 'curry', 'counties', 'drive', 'flooded', 'roads', 'amp', 'over', '##pass', '##es']	1432383472659
+['coventry', '##is', 'br', '##umi', '##sb', '##rill', 'flooding', 'amp', 'upset', '##ting', 'care']	1432384224663
+['tornado', 'f', '##5', 'hack', '##le', '##burg', 'april', '##tor', '##nad', '##os', 'devastation', 'hack', '##le', '##burg', 'april', '27th', 'tornado']	1432389207666
+['texas', 'ruins', '1852', 'gr', '##ist', '##mill', 'destroyed', 'onion', 'creek', 'flood', 'flooding', 'predicted', 'tonight', 'h', '##t']	1432389953659
+['beat', '##ho', '##ust', '##on', 'dub', '##nation', 'none']	1432402960663
+['weather', 'latest', 'weather', 'report', '1918', 'winds', '27', '##mp', '##h', 'te', '##mp', '##10', 'bar', '##o', '##10', '##11', '##9', '##hp', '##a', 'rain', 'today', '34', '##mm']	1432405113664
+['tx', '##w', '##x', 'strong', 'thunder', '##storm', 'located', 'miles', 'nw', 'cl', '##eo', '17', 'miles', 'nw', 'junction', 'moving', '30', 'mph', 'potential']	1432408999665
+['deals', 'cars', 'led', 'spot', 'flood', 'work', 'driving', 'light', 'wiring', 'lo', '##om', 'harness', '12', '##v', 'switch']	1432409421660
+['9', '##w', '##x', 'ph', '##ew', 'storm', 'intense', 'flash', 'flooding', 'i', '##25', 'lightning', 'thunder', 'amp', 'small', 'hail', 'stay', 'safe', 'amp', 'inside']	1432410820661
+['salt', '##ba', '##ked', 'dora', '##de', 'saturday', '##night', 'es', '##sr', 'east', '##6th', 'austin', '##ea', '##ts', 'rainy', 'day', 'craving', 'ready']	1432412749661
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'lake', 'tangle', '##wood', 'moving', '35', 'mph', 'hazard', '60', 'mph', 'wind', 'gust', '##s', 'source', 'radar']	1432413241664
+['deals', 'cars', '305', '##2', '4', '##x', '48', '##w', 'led', 'work', 'flood', 'light', 'road', '12', '##v', '##24', '##v', 'truck', '4', '##x', '##4', '4', '##wd', 'boat', 'suv', 'je', '##e']	1432414373658
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '23', '41', '##4', '##pm', 'cd', '##t', '23', '44', '##5', '##pm', 'cd', '##t', 'nw', '##s']	1432415764664
+['po', 'peace', 'water', 'house', 'river']	1432416067665
+['you', '##are', '##un', '##sto', '##ppa', '##ble', 'con', '##chi', '##ta', '##fires', '##torm', 'eurovision', 'ready']	1432416100663
+['ok', '##w', '##x', 'flash', 'flood', 'warning', 'canadian', 'king', '##fish', '##er', 'counties', '930']	1432417256658
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'miles', 'north', 'pleasant', 'farms', 'moving', '25', 'mph', 'hazard', '60', 'mph', 'wind', 'gust', '##s', 'large']	1432418529661
+['monaco', '##gp', 'lotus', '##f', '##1', '##tea', '##m', 'venezuela', 'pd', '##vs', '##a', 'richard', '##mill', '##e', 'pastor', '##mal', '##don', '##ado', 'none']	1432419103659
+['deals', 'cars', '4', '##x', '48', '##w', 'led', 'work', 'flood', 'light', 'road', '12', '##v', '##24', '##v', 'truck', '4', '##x', '##4', '4', '##wd', 'boat', 'suv', 'jeep', 'tractor']	1432420146660
+['ok', '##c', 'ok', '##w', '##x', 'large', 'confirmed', 'tornado', 'min', '##co', 'sw', 'metro', 'live', 'coverage']	1432420798660
+['thunder', '##storm', 'texas', '##weather', 'severe', '##th', '##under', '##storm', 'k', '##t', 'clouds', 'good']	1432422197663
+['ts', '##ust', '##or', '##m', 'thumbs', 'graphic', 'design', 'easy', 'design', 'me', '##me']	1432422729665
+['ok', '##w', '##x', 'thinking', 'folks', 'oklahoma', 'enduring', 'day', 'bad', 'storms', 'terrible', 'flooding']	1432423059663
+['tornado', 'ok', '##w', '##x', 'blanchard', 'shelter']	1432423087658
+['tx', '##w', '##x', 'tornado', 'watch', 'coleman', 'con', '##cho', 'crane', 'cr', '##ock', '##ett', 'dawson', 'ec', '##tor', 'counties']	1432423318663
+['tx', '##w', '##x', 'tornado', 'watch', 'jeff', 'davis', 'jones', 'kim', '##ble', 'loving', 'mcc', '##ull', '##och', 'martin', 'counties']	1432423321659
+['tx', '##w', '##x', 'tornado', 'watch', 'taylor', 'terre', '##ll', 'th', '##rock', '##mo', '##rton', 'tom', 'green', 'upton', 'ward', 'counties']	1432423332661
+['ok', '##w', '##x', 'tornado', 'warning', 'la', '##time', '##r', 'county', '83', '##0', '##pm', 'cd', '##t', 'warning', 'ok', '##fus', '##kee', 'county']	1432429372661
+['pray', 'texas', 'weather', 'tornado', 'team', '##je', '##sus', 'prayer', 'amp', 'flood', 'warnings', '##pr', '##ay', 'homeless', 'amp', 'vulnerable']	1432431688659
+['ok', '##w', '##x', 'we', '##ve', '70', 'rescues', 'today', 'high', 'water', 'stay', 'safe', 'high', 'water', 'drive', 'turn', 'ar', '##o']	1432431802663
+['tx', '##w', '##x', 'tornado', 'warning', 'issued', '23', '84', '##3', '##pm', 'cd', '##t', '23', '91', '##5', '##pm', 'cd', '##t', 'nw', '##s']	1432432085660
+['floods', 'uk', '##fl', '##ood', '##s', 'flooding', 'latest', 'flooding', 'evacuation', 'orders', 'oklahoma', 'texas', 'cities', 'north', '##e']	1432432138661
+['tx', '##w', '##x', 'residents', 'san', 'antonio', '##ne', 'be', '##xa', '##r', 'county', 'tornado', 'precautions']	1432432548660
+['tx', '##w', '##x', 'tornado', 'warning', 'includes', 'city', 'austin']	1432433028657
+['tx', '##w', '##x', 'friends', 'austin', 'tornado', 'warning', 'issued', 'strong', 'rotation', 'detected', 'storm', 'moving', '40', 'mph']	1432433140665
+['ok', '##w', '##x', 'flood', 'warning', 'beck', '##ham', 'custer', 'roger', 'mills', 'wash', '##ita', 'counties', 'midnight']	1432433464657
+['tops', '##tori', '##es', 'latest', 'flooding', 'highway', 'closure', '##s', 'oklahoma']	1432436674662
+['oklahoma', '##fl', '##ood', '##20', '##15', 'remember', 'lakes', 'rivers', 'ponds', 'separated', 'oklahoma', 'yeah']	1432437285661
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'kill', '##een', 'temple', 'milano', 'moving', '45', 'mph', 'hazard', '60', 'mph', 'wind', 'gust']	1432440222664
+['ok', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'pry', '##or', 'cho', '##ute', '##au', 'moving', '35', 'mph', 'hazard', '60', 'mph', 'wind', 'gust', '##s', 'source']	1432440309658
+['tx', '##w', '##x', 'flash', 'flood', 'warning', 'brooks', 'jim', 'hog', '##g', 'starr', 'counties', '145']	1432443394658
+['tx', '##w', '##x', 'flash', 'flood', 'warning', 'band', '##era', 'be', '##xa', '##r', 'blanco', 'coma', '##l', 'gilles', 'band', '##era', '61', '##5', '##am', 'cd', '##t']	1432446726660
+['en', '##ew', '##s', 'end', '##time', '##s', '##ne', '##ws', 'latest', 'flooding', 'music', 'festival', 'evacuated', 'oklahoma', 'oklahoma', 'city']	1432446739665
+['cars', 'deals', '24', '120', '##w', 'led', 'work', 'light', 'off', '##ro', '##ad', '4', '##x', '##4', 'suv', 'car', 'boat', 'bar', 'flood', 'spot', 'light']	1432447246660
+['climate', '##chang', '##e', 'the', '##cl', '##im', '##da', '##tf', '##ac', 'socio', '##economic', 'data', 'global', 'environmental', 'change']	1432450493663
+['ct', '##x', '##w', '##x', 'tx', '##w', '##x', 'flood', 'emergency', 'blanco', 'river', 'wi', '##mber', '##ley', 'west', 'kyle', 'north', 'san', 'marcos', 'historic', 'flooding', 'expected']	1432450845657
+['brisbane', 'remaining', 'victoria', 'bridge', 'partially', 'destroyed', 'black', 'february', 'flood', '1893']	1432451226658
+['kyle', '##t', '##x', 'expect', 'i', '##35', 'water', 'blanco', 'river', 'hours', 'historic', 'flooding', 'n', '##b', 'sb', 'closed']	1432454410660
+['tx', '##w', '##x', 'report', 'fischer', 'store', 'bridge', 'blanco', 'river', 'destroyed']	1432455138665
+['hai', '##ku', 'oklahoma', 'gentle', 'steady', 'rains', 'eighteen', 'inches', 'recorded']	1432456518663
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'austin', 'colorado', 'jackson', 'mata', '##gor', '##da', 'counties', '415']	1432456864665
+['tx', '##w', '##x', 'flood', 'wave', 'blanco', 'river', 'moving', 'san', 'marcos', 'river', '65', 'feet', '10', 'minutes']	1432457660666
+['the', '##storm', '##sco', '##ming', 'tonight', 'movie', 'grateful', 'single']	1432461810661
+['blanco', 'flash', '##fl', '##ood', 'tx', '##w', '##x', '34', '##ft', 'rise', 'river', 'wi', '##mber', '##ley', 'hours']	1432467157663
+['houston', 'good', 'news', 'tornado', 'warnings', 'expired', 'severe', 'ts', '##torm', 'warning', 'continues', 'tune', 'abc', '##13']	1432468398662
+['flood', 'usa', 'flash', 'warnings', 'remain', 'force', 'parts', 'texas', 'oklahoma', '100', '##mm', 'rain', 'fell', 'places']	1432470878658
+['ok', '##w', '##x', 'flood', 'warning', 'at', '##oka', 'johnston', 'marshall', 'counties', '130']	1432471312660
+['hawaii', 'latest', 'flooding', 'music', 'festival', 'evacuated', 'oklahoma']	1432471961657
+['kali', '##gan', '##dak', '##i', 'god', 'flood']	1432472038658
+['alt', '##uso', '##k', 'ok', '##w', '##x', 'area', '##l', 'flood', 'warning', 'jackson', 'county', '200', '##pm', 'cd', '##t', 'sunday']	1432472174660
+['turn', '##around', '##don', '##t', '##dro', '##wn', 'tx', '##w', '##x', '##may', '##20', '##15', 'rain', 'flooding', 'continue', 'texas', 'careful', 'drive', 'buckle', 'slow', 'amp']	1432472480665
+['ok', '##w', '##x', 'flood', 'warning', '44', '##5', 'ada', '##ir', 'county']	1432476580659
+['tx', '##st', 'tx', '##st', '##19', 'san', 'marcos', 'flooded', 'amp', 'pp', '##l', 'float']	1432477380661
+['at', '##x', '##fl', '##ood', '##s', 'city', 'austin', 'crews', 'reopened', 'joe', 'tanner', 'bee', 'caves', 'low', 'water', 'crossings', 'h', '##wy', '290', 'sw', 'austin']	1432481015657
+['mo', '##w', '##x', 'flood', 'warning', '250', 'platt', '##e', 'county']	1432481533662
+['ks', '##w', '##x', 'flood', 'warning', 'anderson', 'county', 'ks', '44', '##5']	1432482397663
+['flood', 'ok', '##w', '##x', 'norman', 'flood', 'waters', 'remain', 'historic', 'rainfall', 'norman']	1432483360660
+['us', '##n', '##ws', '##go', '##v', 'flood', 'warning', 'issued', '24', '110', '##9', '##am', 'cd', '##t', '29', '1100', '##am', 'cd', '##t', 'nw', '##s', 'national', 'we', '##ath']	1432484250666
+['dallas', 'texas', 'severe', 'thunder', '##storm', 'warning', 'parts', 'tar', '##rant', 'county', 'johnson', 'county', 'cancelled']	1432484511662
+['boston', 'latest', 'flooding', 'residents', 'evacuated', 'boats', 'cop', '##ter']	1432485030664
+['aspen', '##hei', '##ght', '##s', 'san', '##mar', '##cos', 'flooding', 'pic', '##s', 'apt', '##s', 'pic', '##s', 'clint', 'st', '##oe', '##ck']	1432485612659
+['flood', 'tx', '##w', '##x', 'video', 'bad', 'morning', 'san', 'marcos']	1432485846661
+['deals', 'ho', '##mc', '##om', '34', '180', '##w', 'led', 'work', 'light', 'off', '##ro', '##ad', '4', '##x', '##4', 'suv', 'car', 'boat', 'bar', 'flood', 'spot', 'light']	1432486705665
+['sm', '##t', '##x', '##fl', '##ood', 'stay', 'safe']	1432487227657
+['wi', '##mber', '##ley', 'k', '##ho', '##u', '##11', 'incredible', 'bridge', 'blanco', 'river', 'texas', 'destroyed', 'flooding']	1432487972657
+['aviation', 'news', 'lynn', 'daily', 'item', 'latest', 'flooding', 'residents', 'evacuated', 'boats', 'cop', '##ter']	1432488543659
+['wi', '##mber', '##ley', 'wi', '##mber', '##ley', '##fl', '##ood', 'damage']	1432488556661
+['tornado', 'weather', '##channel', 'watch', '7', '##pm', 'cd', '##t', 'arkansas', 'parts', 'texas', 'amp', 'louisiana']	1432490393659
+['d', '##f', '##w', '##w', '##x', 'damage', 'survey', 'team', 'las', 'colin', '##as', 'irving', 'farmers', 'branch', 'areas', 'assess', 'storm', 'damage']	1432491399665
+['mo', '##w', '##x', 'strong', 'thunder', '##storm', 'hurricane', 'deck', 'miles', 'west', 'os', '##age', 'beach', 'moving', 'north', '45', 'mph', 'winds']	1432492857663
+['ar', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'johnson', 'logan', 'montgomery', 'polk', 'counties', '345']	1432497494666
+['texas', '##fl', '##ood', '##ing', 'pictures', 'day', 'wi', '##mber', '##ley', 'blanco', 'river']	1432498355660
+['wi', '##mber', '##ley', 'blanco', 'central', '##te', '##xa', '##s', 'san', '##mar', '##cos', 'san', 'marcos', 'hardest', 'hit', 'storms', 'swept', 'central', 'texas']	1432498725659
+['wi', '##mber', '##ley', 'deer', 'fa', '##wn', 'rescued', 'raging', 'blanco', 'river']	1432499857660
+['ok', '##w', '##x', 'flash', 'flood', 'warning', 'payne', 'county']	1432501394660
+['mo', '##w', '##x', 'tornado', 'watch', 'benton', 'camden', 'christian', 'dallas', 'dent', 'douglas', 'counties']	1432502454659
+['flooding', 'rainfall', '30', 'days']	1432502457663
+['waterfall', 'ib', '##b', 'none']	1432505110663
+['ar', '##w', '##x', 'tornado', 'watch', 'newton', 'ou', '##achi', '##ta', 'perry', 'pike', 'polk', 'pope', 'prairie', 'counties']	1432505346661
+['ar', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'greer', '##s', 'ferry', 'he', '##ber', 'springs', 'pang', '##burn', 'mc', '##rae', 'moving', '45', 'mph']	1432506155663
+['aus', '##pol', 'climate', '##chang', '##e', 'reasons', 'president', 'obama', 'global', 'warming', 'poses', 'threat', 'national', 'security']	1432508079662
+['ar', '##w', '##x', 'branch', 'blown', 'storm', 'w', '##lr', 'bit', 'ago', 'time', 'log']	1432508613662
+['ar', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'morris', '##ton', 'sidney', 'cave', 'city', 'oil', 'trough', 'moving', 'north', '45', 'mph']	1432508810661
+['ar', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'charles', 'gunn', '##ison', 'moving', '50', 'mph', 'hazard', '60', 'mph', 'wind', 'gust', '##s']	1432508926664
+['at', '##x', '##fl', '##ood', '##s', 'volunteers', 'flood', 'relief', 'efforts', 'details', 'spread', 'word']	1432510257665
+['texas', '11', '##weather', 'dead', 'missing', 'hundreds', 'homes', 'damaged', 'san', 'marcos']	1432511802665
+['climate', '##chang', '##e', 'global', '##war', '##ming', '##ho', '##ax', 'great', 'global', 'warming', 'sw', '##ind', '##le', 'movie']	1432512026660
+['ms', '##w', '##x', 'strong', 'thunder', '##storm', 'affect', 'western', 'hind', '##s', 'county', '74', '##5', '65', '##9', 'strong', 'thunder', '##storm', 'ut', '##ica']	1432512128661
+['ok', '##w', '##x', 'cotton', '##wood', 'creek', '730', '##pm']	1432514068662
+['charlie', '##cha', '##rl', '##iec', '##hall', '##eng', '##e', 'ya', '##ll', 'spare', 'pencil', 'school', 'flooding', 'summon', 'devil']	1432517097662
+['ar', '##w', '##x', 'flood', 'warning', 'sebastian', 'county']	1432519341660
+['ar', '##w', '##x', 'flood', 'warning', 'carroll', 'washington', 'counties']	1432519816666
+['tornado', 'photos', 'warned', 'storm', 'earlier', 'pro', '##wer', '##s', 'county', 'heading', 'rogue', 'storm', 'hugo', '##ton', 'ks']	1432521774663
+['metro', 'news', 'aerial', 'photographs', 'capture', 'true', 'scale', 'devastation', 'record', '##break', '##ing', 'floods', 'swept', 'ok', '##la']	1432528065664
+['sm', '##t', '##x', '##fl', '##ood', 'flooding', 'bae', 'parents', 'ain', '##t']	1432544959657
+['us', '##n', '##ws', '##go', '##v', 'flood', 'warning', 'issued', '25', '304', '##am', 'md', '##t', '26', '400', '##pm', 'md', '##t', 'nw', '##s', 'flood', 'warning']	1432544977664
+['latin', 'storm', 'en', '##vat', '##oma', '##rke', '##t', 'audio', '##jun', '##gle', 'check']	1432551719665
+['tx', '##w', '##x', 'severe', 'storms', 'heavy', 'rain', 'today', 'flash', 'flood', 'watch']	1432552774665
+['photo', 'waterfall', 'waterfalls', 'contrasts', 'ya', '##gu', '##kon']	1432552919662
+['tr', '##md', '##ri', '##val', 'flooding']	1432554614660
+['fire', '##fighter', 'killed', 'flooding', 'wr', '##eak', '##s', 'havoc', 'texas', 'oklahoma', 'news', 'abc']	1432555108658
+['cbs', '##11', '##w', '##x', 'severe', '##weather', 'd', '##f', '##w', '##w', '##x', 'breaking', 'trinity', 'river', 'climbed', '40', 'feet', 'major', 'flood']	1432555306661
+['little', '##rock', '##weather', 'always', '##fo', '##llo', '##w', '##back', 'isolated', 'thunder', '##storm', '##s', 'today', 'high', '83', '##f', 'low', '67', '##f']	1432557113658
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '80', '##8', '##am', 'cd', '##t', '25', '91', '##5', '##am', 'cd', '##t', 'nw', '##s']	1432560155664
+['tx', '##w', '##x', '83', '##4', '##am', 'flooding', 'major', 'concern', 'today', 'areas', 'received', 'lots', 'rain', 'busiest', 'spring']	1432560918661
+['water', '##dam', '##age', 'glendale', 'water', 'flood', 'damage', 'restoration', '87', '##7', '67', '##35', '##33', '##6', 'water', 'damage']	1432561150662
+['nepal', 'river', 'blocked', 'landslide', 'flowing', 'risks', 'flash', 'floods']	1432561763659
+['fox', '##ne', '##ws', 'news', 'dead', 'missing', 'severe', 'storms', 'floods', 'slam', 'texas', 'oklahoma']	1432562132662
+['d', '##f', '##w', '##w', '##x', 'moderate', 'risk', 'sv', '##r', 'w', '##x', 'today', 'including', 'tornadoes', 'time', 'frame', '18']	1432562685658
+['weather', 'delay', 'airport', 'southwest', 'chicago', 'weather', 'airport', 'delays']	1432565710662
+['ted', '##x', '##storm', '##ont', '##wo', '##men', 'ni', 'ted', '##x', '##storm', '##ont', 'ready', 'ni', '##s', 'leading', 'women']	1432567136664
+['tornado', 'ks', '##w', '##x', 'photo', 'large', 'southeast', 'plains', 'ks', 'night', 'photo', 'credit', 'mike', 'um', '##sche', '##id']	1432567352664
+['tx', '##w', '##x', 'tornado', 'watch', 'robertson', 'rock', '##wall', 'run', '##nel', '##s', 'san', 'sa', '##ba', 'sc', '##hl', '##ei', '##cher', 'counties']	1432569264659
+['climate', '##chang', '##eis', '##real', 'co', '##2', 'storms', 'worse', 'storms', 'horrible', 'long', 'ago']	1432569700666
+['new', '##x', 'flood', 'warning', 'issued', '25', '103', '##7', '##am', 'cd', '##t', 'notice', 'nw', '##s']	1432569846662
+['new', '##x', 'flood', 'warning', 'issued', '25', '103', '##8', '##am', 'cd', '##t', 'notice', 'nw', '##s']	1432569847662
+['ab', '##ile', '##ne', 'tx', '##w', '##x', 'strong', 'severe', 'thunder', '##storm', '##s', 'moving', 'east']	1432570569662
+['ms', '##w', '##x', 'flash', 'flood', 'warning', 'monroe', 'county', '230']	1432572075664
+['n', '##by', '##c', 'istanbul', 'texas', 'oklahoma', 'floods', '12', 'people', 'missing', 'rain', 'forecast']	1432573821660
+['thunder', '##storm', '##s', 'texas', 'tornadoes', 'usa', 'developing', 'plains', 'risk', 'flash', 'flooding', 'hail']	1432574166657
+['flight', 'weather', 'flights', 'cancelled', 'weather']	1432574418661
+['tornado', 'warning', 'young', 'county', 'texas', 'cd', '##t', 'wind', 'gust', '##s', '50', '##60', 'mph', 'reported', 'woods', '##on']	1432574522659
+['w', '##fa', '##aw', '##ea', '##ther', 'severe', 'ts', '##torm', 'warning', 'coma', '##nche', 'county', '115', '##pm', 'damaging', 'winds', '60', '##mp', '##h']	1432574998664
+['help', '##hay', '##s', 'we', '##ve', 'set', 'account', 'hays', 'flood', 'victims']	1432576442658
+['tx', '##w', '##x', 'tornado', 'watch', 'palo', 'pinto', 'parker', 'robertson', 'rock', '##wall', 'some', '##r', '##vel', '##l', 'counties']	1432576526662
+['ok', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'dev', '##ol', 'miles', 'north', 'bellevue', 'moving', '35', 'mph', 'hazard', '70', 'mph']	1432579086662
+['wi', '##mber', '##ley', '##fl', '##ood', 'water', 'intense', 'foot', 'wide', 'concrete', 'pillars', 'snapped', 'twigs']	1432579491659
+['tx', '##w', '##x', '124', '##8', '##pm', 'tornado', 'reported', 'northeast', 'frederick', '##sburg']	1432579673657
+['tx', '##w', '##x', 'strong', 'thunder', '##storm', '##s', 'miles', 'west', 'sang', '##er', 'has', '##let', 'moving', 'east', '30', 'mph', 'wind', 'gust', '##s']	1432581172659
+['ok', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '158', '##pm', 'cd', '##t', '25', '245', '##pm', 'cd', '##t', 'nw', '##s']	1432581405664
+['tx', '##w', '##x', 'tornado', 'warning', 'issued', '25', '227', '##pm', 'cd', '##t', '25', '300', '##pm', 'cd', '##t', 'nw', '##s']	1432582310666
+['at', '##x', '##weather', 'tornado', 'warning', 'travis', 'hays', 'counties', 'extended', '315']	1432582707665
+['ks', '##w', '##x', 'strong', 'thunder', '##storm', 'garden', 'plain', 'moving', 'north', '45', 'mph', 'hail', 'size', 'nickel', '##s']	1432583108661
+['ok', '##w', '##x', 'flood', 'warning', 'tulsa', 'county']	1432583249666
+['tx', '##w', '##x', 'strong', 'thunder', '##storm', 'elm', 'lake', 'lewis', '##ville', 'moving', 'east', '50', 'mph', 'dime', 'size', 'hail', 'wind']	1432583708659
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'god', '##ley', 'joshua', 'moving', 'east', '70', 'mph', 'hazard', '70', 'mph', 'wind', 'gust', '##s', 'large']	1432584185665
+['key', '##ew', '##x', 'flash', 'flood', 'warning', 'williamson', 'county', 'video']	1432584442666
+['at', '##x', '##w', '##x', 'stay', 'safe', 'tornado']	1432584461658
+['tx', '##w', '##x', 'flash', 'flood', 'warning', 'hamilton', 'county', '600', '##pm', 'monday']	1432584479658
+['ok', '##w', '##x', 'tornado', 'warning', 'at', '##oka', 'county', '400', '##pm', 'cd', '##t']	1432585475660
+['video', 'tornado', 'pi', '##dc', '##oke', 'cory', '##ell', '##co', '##unt', '##y', 'texas', 'tx', '##w', '##x', '25']	1432585602661
+['tx', '##w', '##x', 'flood', 'advisory', 'wise', 'county', '61', '##5']	1432585633659
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '338', '##pm', 'cd', '##t', '25', '430', '##pm', 'cd', '##t', 'nw', '##s']	1432586533665
+['tex', '##oma', '##w', '##x', 'power', 'watch', 'storm', 'coverage']	1432586706664
+['ok', '##w', '##x', '34', '##6', '##pm', 'tornado', 'east', 'at', '##oka', 'moving', '35', 'mph', 'people', 'at', '##oka', 'string', '##town', 'cover']	1432586873665
+['smoke', '##ever', '##y', '##w', '##her', '##e', 'texas', '##fl', '##ood', '##ing', 'news', 'iv', '##e', 'reached', 'target', 'heart', 'rate', 'week', 'scare']	1432586897664
+['ok', '##w', '##x', '259', '##pm', 'storms', 'moving', 'central', 'ok', '##ok', '##c', 'metro', 'gust', '##y', 'winds', 'scary', 'clouds', 'lightning', 'heavy', 'rain', 'stay', 'alert']	1432586930666
+['w', '##fa', '##aw', '##ea', '##ther', 'north', 'dallas', 'street', 'flooding', 'frank', '##ford', 'campbell']	1432586935665
+['ks', '##w', '##x', 'ks', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '339', '##pm', 'cd', '##t', '25', '415', '##pm', 'cd', '##t', 'nw', '##s']	1432587334663
+['d', '##f', '##w', '##w', '##x', '401', '##pm', 'sv', '##r', 'ts', '##torm', 'warning', '51', '##5', '##pm', 'delta', 'fan', '##nin', 'hopkins', 'hunt', 'lamar', 'rains', '51', '##5', '##pm']	1432587875665
+['climate', '##chang', '##e', 'global', '##war', '##ming', 'share', '##able', 'strategies', 'creating', 'climate', 'action']	1432587879659
+['good', '##gu', '##yt', '##orn', '##ado', 'ill', 'ya', '##ll', 'decide', 'hit', 'ground']	1432588306658
+['ct', '##x', '##w', '##x', '415', '##pm', 'continuing', 'tornado', 'threat', 'mil', '##am', 'ben', 'arnold']	1432588628659
+['tx', '##w', '##x', 'tornado', 'miles', 'east', 'worth', '##am', '10', 'miles', 'me', '##xia', 'moving', '25', 'mph', 'hazard', 'damaging', 'tornado']	1432589207658
+['weather', 'forecast', 'wednesday', 'night', 'clear', 'low', '##s', '42', '52', 'light', 'winds', 'day', 'forecast']	1432589348658
+['tx', '##w', '##x', 'tornado', 'watch', 'rus', '##k', 'san', 'augustine', 'san', 'ja', '##cin', '##to', 'shelby', 'smith', 'counties', '10']	1432589390660
+['tornado', '##watch', 'ko', '##kor', '##issa', 'kv', '##rne', '##ws', 'weather', '##channel', 'issued', 'austin', 'surrounding', 'cities']	1432589609665
+['ok', '##w', '##x', 'upset', 'flood', 'may', '##weather', 'weeks', 'ago', 'tired']	1432589799665
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'points', 'worth', '##am', 'moving', '45', 'mph', 'hazard', '60', 'mph', 'wind', 'gust', '##s', 'h', '##tt']	1432590186659
+['ks', '##w', '##x', 'ks', 'tornado', 'warning', 'issued', '25', '43', '##6', '##pm', 'cd', '##t', '25', '500', '##pm', 'cd', '##t', 'nw', '##s']	1432590337665
+['flooding', 'austin', 'waller', '##cre', '##ek', 'at', '##x', '##fl', '##ood', '##s', '9th', 'red', 'river', 'downtown']	1432591026660
+['tx', '##w', '##x', 'tornado', 'warning', 'issued', '25', '45', '##9', '##pm', 'cd', '##t', '25', '54', '##5', '##pm', 'cd', '##t', 'nw', '##s']	1432591302660
+['per', '##is', '##cope', 'live', 'caleb', 'flood', 'waters']	1432591414666
+['ar', '##w', '##x', 'stormy', 'evening', 'receive', 'warnings', 'phone', 'charged', 'stay', 'channel']	1432591583660
+['tx', '##w', '##x', 'at', '##x', '##fl', '##ood', '50', '##7', '##pm', 'round', 'rock', '66', '##1', 'rain', 'afternoon', '43', '##9', 'fell', '252', '352', 'data', 'stat', '##io']	1432591794662
+['ar', '##w', '##x', 'kat', '##v', 'weather', 'alert', 'tornado', 'warning', 'howard', 'county', '54', '##5', '##pm']	1432591970665
+['tx', '##w', '##x', 'at', '##x', '##fl', '##ood', 'flash', 'flood', 'emergency', 'hays', 'caldwell', 'travis', 'bas', '##tro', '##p', 'williamson', 'lee', 'counties']	1432591997660
+['at', '##x', '##fl', '##ood', 'austin', 'at', '##x', 'water', 'rescue', 'north', '##lo', '##op']	1432592131666
+['ct', '##x', '##w', '##x', 'view', 'earlier', 'tornado', 'kemp', '##ner', 'jennifer', 'cha', '##ppel', '##l']	1432592474665
+['at', '##x', '##fl', '##ood', '##s', 'at', '##x', '##weather', 'dear', 'mother', 'nature', 'good', 'austin']	1432592786658
+['grew', '##up', '##int', '##orn', '##ado', '##alle', '##y', 'weather', 'questionable', 'tonight', 'shoes', 'hallway', 'case']	1432592900663
+['ok', '##w', '##x', 'tornado', 'warning', 'has', '##kell', 'la', '##time', '##r', 'fl', '##ore', 'counties']	1432593095659
+['sm', '##t', '##x', '##fl', '##ood', 'rotation', 'spotted', 'bug', '##g', 'linda', 'san', 'marcos', 'cover']	1432593538665
+['video', 'tornado', 'pi', '##dc', '##oke', 'cory', '##ell', '##co', '##unt', '##y', 'texas', 'tx', '##w', '##x', 'texas', '##weather', '25']	1432593630660
+['at', '##x', 'at', '##x', '##fl', '##ood', 'safe', 'closing', 'store', 'expect', 'open', 'tomorrow', '9', '##am', 'stay', 'safe']	1432594394665
+['ok', '##w', '##x', '555', '##pm', '##st', '##rong', 'rotation', 'developing', 'nw', 'pot', '##eau', 'tornado', 'develop', 'cover']	1432594858666
+['at', '##x', '##fl', '##ood', '##s', 'at', '##x', '##weather', 'lamar', 'sho', '##al', 'creek', 'saloon', 'worse', 'iv', '##e']	1432595148665
+['tx', '##w', '##x', 'at', '##x', '##fl', '##ood', '##s', 'tremendous', 'rainfall', 'training', 'band', 'storms', 'san', 'antonio', 'college', 'station', 'hourly', 'rainfall', 'nearing', '35', 'inch', '##e']	1432595196664
+['tx', '##w', '##x', '55', '##6', '##pm', 'tornado', 'warnings', 'texas', 'time', 'severe', 'weather', 'continues', 'track']	1432595276659
+['at', '##x', '##fl', '##ood', 'at', '##x', '##fl', '##ood', '##s', 'up', '##dating', 'austin', 'flood', 'coverage']	1432595772662
+['at', '##x', '##fl', '##ood', '##s', 'at', '##x', '##weather', 'tx', '##w', '##x', 'fox', '##7', '##aus', '##tin', 'sho', '##al', '##cre', '##ek', 'downtown', 'austin', 'flooding', '9th', 'amp', 'lamar']	1432596577660
+['at', '##x', '##fl', '##ood', '##s', 'lamar', 'austin', 'flood', 'fr', '##esa', '##s', '12th', 'lamar']	1432596864665
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'guadalupe', 'lee', 'wilson', 'counties', '64', '##5']	1432597023660
+['tx', '##w', '##x', 'tornado', 'warning', 'issued', '25', '63', '##3', '##pm', 'cd', '##t', '25', '71', '##5', '##pm', 'cd', '##t', 'nw', '##s']	1432597266665
+['ar', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'columbia', 'hem', '##ps', '##tead', 'howard', 'lafayette', 'counties', '71', '##5']	1432597410662
+['shaved', '##mu', '##ff', 'shaved', '##pus', '##sy', 'flood']	1432597442659
+['davis', 'kramer', 'weather', 'york', 'storm', 'prediction', 'cent', '##r', 'slight', 'risk', 'severe', 'we', '##ath', '##r', 'view', '##in', 'area']	1432597873664
+['mo', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '65', '##1', '##pm', 'cd', '##t', '25', '700', '##pm', 'cd', '##t', 'nw', '##s']	1432598314660
+['ok', '##c', '##14', '##3', 'flash', 'flood', 'warning', 'issued', '25', '521', '##pm', 'cd', '##t', 'ex', '##pi', '##ring', '26', '130', '##am', 'cd', '##t', 'nw', '##s', 'tulsa']	1432598673660
+['at', '##x', '##fl', '##ood', 'round', '##rock', '##ex', '##press', 'dell', 'diamond', 'amp', 'settler', 'park', 'entrance']	1432599347665
+['texas', '##fl', '##ood', 'stevie', 'ray', 'standing', 'tall']	1432599469661
+['ar', '##w', '##x', 'tornado', 'watch', 'benton', 'carroll', 'crawford', 'franklin', 'madison', 'counties', '10']	1432599573657
+['at', '##x', '##fl', '##ood', '##s', 'key', '##ew', '##x', '13th', 'guadalupe']	1432599602666
+['w', '##fa', '##aw', '##ea', '##ther', 'breaking', 'news', 'sun']	1432599845665
+['at', '##x', '##fl', '##ood', '##s', 'sho', '##al', 'creek', 'ste', '##ck', 'walk', 'ankles', 'wet']	1432599892658
+['at', '##x', '##weather', 'at', '##x', '##fl', '##ood', '##s', 'case', 'curious', 'exit', '79', '130', 'round', 'rock', 'hut', '##to']	1432600138666
+['at', '##x', '##fl', '##ood', '##s', 'flew', 'drone', 'town', 'lake', 'sho', '##al', 'creek', 'flooding', 'downtown']	1432600682663
+['ka', '##rew', '##ea', '##ther', 'storm', 'moving', 'good', '##hue', '50', '##mp', '##h', 'wind', 'gust', '##s', 'dime', 'size', 'hail']	1432600955663
+['at', '##x', '##weather', 'ready', 'rescue', 'attempts', 'sho', '##al', 'creek', 'west', '6th', 'west', '5th']	1432601108665
+['at', '##x', '##fl', '##ood', '##s', 'austin', 'texas', 'drowning', 'climate', 'change', 'isn', '##t', 'real', 'god']	1432601711663
+['ar', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'miles', 'spring', '##dale', 'wesley', 'moving', 'north', '35', 'mph', 'hazard', '60']	1432602976661
+['at', '##x', '##fl', '##ood', '##s', 'bas', '##tro', '##p', 'blocks', 'roads', 'closes', 'offices', 'cancel', '##s', 'school', 'activities']	1432603348663
+['the', '##sund', '##ail', '##y', 'news', 'tornado', 'floods', 'leave', 'deadly', 'trail', 'mexico', '##us', 'border', 'mexico', 'city', 'tornado', 'ripped']	1432603610666
+['ar', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'rupert', 'over', '##cup', 'perry', '##ville', 'moving', 'east', '50', 'mph', 'hazard', '70', 'mph']	1432603948661
+['tx', '##w', '##x', 'flood', 'warning', 'issued', 'madison', 'walker', 'counties']	1432603980662
+['ho', '##uw', '##x', 'heads', 'storm', 'tightening', 'rotation', 'west', '##park', '##s', 'ci', '##nco', 'ranch', 'tornado', 'warn']	1432604028665
+['at', '##x', 'at', '##x', '##fl', '##ood', 'picture', 'sky', 'post', 'incredible', 'orange', 'sunset', 'glow']	1432605083664
+['ar', '##w', '##x', 'tornado', 'vortex', 'disappeared', 'pu', '##las', '##ki', 'headed', 'faulkner', 'stay', 'safe', 'place']	1432605125666
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'austin', 'colorado', 'fort', 'bend', 'waller', 'counties', '10']	1432606384663
+['flood', '##fu', '##nd', 'conservation', 'work', 'party', 'tha', '##ck', '##a', 'beck', 'nature', 'reserve', 'pen', '##rith', '27']	1432607074661
+['flooding', 'austin', '##pet', '##sal', '##ive', 'shelter', 'shelter', 'foster', '##s']	1432607177666
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '90', '##2', '##pm', 'cd', '##t', '25', '930', '##pm', 'cd', '##t', 'nw', '##s']	1432607345659
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '92', '##7', '##pm', 'cd', '##t', '25', '930', '##pm', 'cd', '##t', 'nw', '##s']	1432607465658
+['at', '##x', '##weather', 'texas', '##fl', '##ood', 'people', 'stay', 'inside', 'mid', 'june', 'point']	1432608390663
+['trinity', 'beautiful', 'flood']	1432610240665
+['ho', '##uw', '##x', 'tx', '##w', '##x', 'incredible', '3', '##hr', 'rainfall', 'totals', '104', '##9', '##pm', 'houston']	1432612350661
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '104', '##3', '##pm', 'cd', '##t', '25', '113', '##0', '##pm', 'cd', '##t', 'nw', '##s']	1432612445661
+['dallas', 'rain', 'flood', 'trinity', 'river', 'rain']	1432613474658
+['floods', 'texas', 'end', '##of', '##world', 'water', 'weather', 'deadly', 'wr', '##eak', 'havoc']	1432613657660
+['houston', 'flash', '##fl', '##ood', 'storm', 'fucked', 'feel', 'bad', 'road']	1432614417658
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '25', '112', '##9', '##pm', 'cd', '##t', '26', '100', '##am', 'cd', '##t', 'nw', '##s']	1432615327665
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'blanco', '##nia', '14', 'miles', 'ski', '##dm', '##ore', 'moving', 'east', '20', 'mph', 'locations', 'impacted', 'inc', '##l']	1432616113657
+['ho', '##uw', '##x', 'middle', 'flash', 'flood', 'emergency', 'zone', 'lightning', 'flash']	1432617125666
+['ho', '##uw', '##x', 'ho', '##une', '##ws', '12', '69', '##k', 'out', '##ages', 'houston', 'track', 'out', '##ages']	1432617396661
+['spider', 'houston', 'warriors', '##vs', '##rock', '##ets', 'waiting', 'storm', 'post']	1432618606664
+['texas', '##fl', '##ood', 'tam', '##u', 'students', 'summer', 'classes']	1432619300661
+['houston', '##weather', 'eat', 'girl', 'drown']	1432619463663
+['we', '##can', '##t', '##go', '##any', '##w', '##her', '##e', 'staying', 'safe', 'pays', 'fans', 'flooding', 'houston', 'continues']	1432619592658
+['west', '##side', 'houston', 'forget', 'awful', 'major', 'flooding', 'hail', 'trees', 'cars', 'stranded']	1432620138658
+['texas', 'flood', 'warning', 'harris', 'county', 'turn', 'twitter', 'rain', 'coming']	1432620477660
+['tx', '##w', '##x', 'houston', 'crazy', 'lightning', 'sugar', 'land', 'street', 'flooding', 'power', 'h', '##tt']	1432620509666
+['rockets', 'warriors', 'houston', '##fl', '##ood', '##s', 'dwight', 'visiting', 'fans', 'stuck', 'toyota']	1432621250662
+['water', '##war', '##s', 'none', '##stle', 'oregon', 'water', 'privatization', 'columbia', 'river', 'gorge']	1432621669657
+['tornado', '##wa', 'dye', '##ss', '##man', '##w', '##x', 'tornado', 'warned', 'cell', 'moved', 'lake', 'strong', '##se', '##vere', 'storms', 'night']	1432623027658
+['tx', '##w', '##x', 'ho', '##uw', '##x', 'severe', 'thunder', '##storm', 'warning', 'storms', 'sw', 'houston', '60', 'mph', 'winds']	1432623043657
+['tx', '##w', '##x', 'texas', '##fl', '##ood', 'iv', '##e', 'lived', 'houston', 'life', 'rain', 'hurricane', 'ike', 'allison']	1432623767661
+['houston', 'k', '##ho', '##u', 'wow', 'check', 'ga', '##tor', 'spotted', 'ga', '##rret', 'road', 'northeast', 'tonight']	1432625366663
+['ot', '##t', '##weather', 'ottawa', 'con', '##t', '##d', 'sun', 'amp', 'cloud', 'tomorrow', 'slight', 'chance', 'thunder', '##storm', '##s', 'high', '27', 'humid', '##ex', '34']	1432628944664
+['k', '##ho', '##u', 'texas', '##fl', '##ood', '##ing', 'drivers', 'stranded', 'i', '##45', 'stay', 'roads', 'photos', 'scott', 'ellison']	1432630885662
+['tx', '##w', '##x', 'ben', '##brook', 'police', 'department', 'searching', 'cai', '##tly', '##n', 'elizabeth', 'williams', 'white', 'female', 'years', 'born']	1432634155659
+['his', '##d', 'ho', '##une', '##ws', 'ho', '##uw', '##x', 'houston', '##fl', '##ood', 'big', 'announcement', 'change', 'schools', 'district', 'offices', 'closed', 'tuesday', '26', '2015']	1432635947657
+['charlotte', 'texas', 'tornado', 'leaves', 'dead', '12', 'missing', 'floods']	1432637740662
+['houston', 'bray', '##s', 'bayou', 'storm', 'crazy']	1432638743665
+['houston', 'houston', '##fl', '##ood', 'turn', '##around', '##don', '##t', '##dro', '##wn', 'pretty', 'shut']	1432638984660
+['tops', '##tori', '##es', 'ya', '##sm', '##in', '##mit', '##ri', 'houston', 'texas', 'hit', 'unprecedented', 'flooding', 'states', 'risk']	1432639625664
+['unite', '##bl', '##ue', 'tsunami', '##type', 'flooding', 'called', 'texas', 'worst', 'disastrous', 'gov']	1432639852665
+['houston', 'houston', '##fl', '##ood', '##ed', 'sun', 'amp', 'lake', 'remains', '610']	1432640621657
+['houston', '##fl', '##ood', 'brady', '##dog', 'bf', '##c', '##53', '##0', 'oslo', '##ff', 'games', '##how', '##amo', '##vie', 'nbc', 'cn', '##bc', 'love', 'samuel', 'in', '##firm', '##ier']	1432640686659
+['houston', '##fl', '##ood', 'unbelievable', 'photo', 'news', 'station', 'north', 'freeway', 'north', 'main']	1432640827664
+['houston', '##fl', '##ood', 'loop', 'grid', '##lock', 'directions', 'bella', '##ire', '##meyer', '##land', 'area', 'high', 'water', 'main', '##lane', '##s']	1432641057658
+['houston', '##fl', '##ood', 'k', '##ho', '##u', '##11', 'katy', 'freeway', 'washington']	1432641363662
+['sd', '##w', '##x', 'flood', 'warning', 'issued', '26', '53', '##5', '##am', 'md', '##t', '29', '600', '##am', 'md', '##t', 'nw', '##s']	1432641515661
+['houston', '##fl', '##ood', 'houston', '##weather', 'stalled', 'abandoned', 'cars']	1432641740663
+['texas', '##fl', '##ood', '##s', 'word', 'prayer', 'respond', '##ers', 'putting', 'risk', 'rescue', 'safe', 'hee', '##d', 'warnings']	1432641748663
+['charlie', '##cha', '##rl', '##iec', '##hall', '##eng', '##e', 'tornado', 'mexico', 'any', '##1', 'weird', 'day', 'powerful', '13', 'dead', 'seconds']	1432642443659
+['ho', '##une', '##ws', 'houston', '##fl', '##ood', 'ho', '##uw', '##x', '288']	1432642631660
+['t', '##weather', 'good', 'morning', 'chicago', 'word', 'un', '##sett', '##led', 'showers', 'thunder', '##storm', '##s', 'cloudy', 'humid', 'high', '78']	1432642768661
+['k', '##ho', '##u', '##11', 'houston', '##fl', '##ood', 'worst', 'fear', 'allison', 'allen', 'parkway', 'montrose', 'photo', 'rachel', '##le']	1432642882662
+['houston', '##fl', '##ood', 'extreme', 'weather', 'fact', 'half', 'fuck', '##as', 'drive', 'any', '##how', '##the', 'city', 'houston', 'closed', 'notice']	1432643027658
+['ho', '##uw', '##x', 'ho', '##une', '##ws', 'houston', '##fl', '##ood', 'stay', 'today', 'i', '##45', 'main', 'photo']	1432643785658
+['mn', '##w', '##x', 'flood', 'warning', 'issued', '26', '73', '##1', '##am', 'cd', '##t', '31', '700', '##am', 'cd', '##t', 'nw', '##s']	1432644307664
+['deadly', 'texas', 'oklahoma', 'mexico', 'china', 'fire', 'kills', 'storms', 'hit', 'nursing', 'dozens', '26', '84', '##8']	1432644580662
+['houston', '##fl', '##ood', 'children', 'blessing', 'god', 'teach', 'love', 'un', '##con', '##ditional', '##ly']	1432644835658
+['houston', '##fl', '##ood', 'fox', '##26', '##ho', '##ust', '##on', 'praying', 'uncle', 'bra', '##es', '##wood', 'flooding', 'house']	1432645068657
+['wake', '##up', '##ame', '##rica', 'texas', '##fl', '##ood', 'climate', '##chang', '##e', 'tc', '##ot', 'p', '##jn', '##et', '1611', '##pa', '##ul', 'dr', '##mart', '##y', '##fo', '##x', 'caused']	1432646183666
+['houston', '##fl', '##ood', 'houston', 'bad', 'flooding', 'photo', 'ken', '##s']	1432646192663
+['miller', '##s', '##just', '##ice', '##lea', '##gue', '##mo', '##rta', '##l', 'follow', 'documentary', 'producers', 'amp', 'updates', 'feel', 'flooding', 'everyone', '##s', 'feeds']	1432646216660
+['tx', '##st', 'sm', '##t', '##x', '##fl', '##ood', 'case', 'ya', '##ll', 'thought', 'funny', 'rest', 'peace', 'man', 'lost', 'life']	1432646220661
+['oklahoma', 'severe', '##storm', '##s', 'tv', 'weather', 'multiple', 'tornadoes', 'spot', '##t', '##d', 'severe', 'we', '##ath', '##r', 'targets', 'areas', 'pound', '##d']	1432646262661
+['texas', 'flash', 'flood', 'houston', '37', 'counties', 'emergency', 'declaration', '##s', '1st', 'emergency', 'issued', 'live', 'updates', 'h', '##t']	1432646422664
+['houston', '##fl', '##ood', 'porsche', 'water']	1432646648658
+['texas', '##fl', '##ood', '##ing', 'climate', 'change', 'threatens', 'health', 'flooding', 'heavy', 'rains']	1432646897659
+['houston', '##fl', '##ood', 'california']	1432647200659
+['houston', '##fl', '##ood', 'gall', '##eria', 'lower', 'parking', 'level', 'water', 'cars', 'incredible', 'pic', 'derrick', 'morning', 'h', '##t']	1432648153658
+['houston', '##fl', '##ood', 'k', '##ho', '##u', '##11', 'abc', '##13', 'bra', '##eb', '##urn', 'bella', '##ire']	1432648346659
+['texas', '##fl', '##ood', '##s', 'mass', 'job', 'losses', 'spends', 'fighting']	1432648467660
+['ho', '##une', '##ws', 'ho', '##uw', '##x', 'floods', 'rec', '##eding', 'good', 'reason', 'stay', 'dry', 'land']	1432648529661
+['houston', '##fl', '##ood', 'stay', 'safe', 'houston', 'stream']	1432648604660
+['im', '##don', '##e', 'flooding', 'long', 'live', 'houston', 'texas', 'invest', 'jet', 'ski', 'boat']	1432648668657
+['tornado', '##sea', '##son', 'over', '##it', 'real']	1432648829664
+['houston', '##fl', '##ood', 'lost', '100', 'year', 'giant', 'pe', '##can', 'tree', 'missed', 'houses']	1432648891658
+['houston', '##fl', '##ood', 'glad', 'houston', 'fa', '##m', 'tip', '##pin', '4', '##s']	1432649254663
+['texas', '##fl', '##ood', 'great', 'aerial', '##s', 'georgetown', 'texas', 'san', 'gabriel', 'river', 'flooded', 'memorial']	1432649866663
+['breaking', 'houston', '##fl', '##ood', 'k', '##ho', '##u', 'update', 'dead', 'houston', 'flooding']	1432650504666
+['texas', '##fl', '##ood', 'ted', '##cr', '##uz', 'remind', 'texas', 'senators', 'voted', 'disaster', 'relief', 'funding']	1432650597664
+['texas', '##tu', '##es', '##day', 'prayers', 'flooded', 'texans', 'today', '##ha', '##ve', 'safe', 'patriots']	1432650818662
+['houston', '##fl', '##ood', 'ga', '##ri', '##bay', 'adrian', '##nae', '##dit', '##h', 'sharing', 'photo', '610', 'post', 'oak', 'road']	1432650941659
+['houston', 'houston', '##fl', '##ood', 'tx', '##w', '##x', 'flash', 'flood', 'watch', 'remains', '12', '##pc', '##t', 'flood', 'warnings', 'continue']	1432651049660
+['houston', '##fl', '##ood', 'city', 'water']	1432651572665
+['k', '##ho', '##u', 'ho', '##uw', '##x', 'allen', 'parkway', 'flooding', 'morning']	1432651635664
+['tx', '##w', '##x', 'austin', 'texas', 'ridiculous', 'flooding', 'thoughts', 'people', 'south', 'flooding']	1432651989659
+['twisted', '##tu', '##es', '##day', 'wet', 'flooded', 'houston', 'stuck', 'fun']	1432652381657
+['houston', '##fl', '##ood', 'photos', 'amazing', 'readers', 'share', 't', '##wee', '##ts']	1432652431658
+['k', '##ho', '##u', '##11', 'houston', '##fl', '##ood', 'today', 'buffalo', 'bayou', 'crossed', 'road']	1432652606658
+['albuquerque', 'family', 'missing', 'wake', 'texas', 'floods']	1432653275662
+['houston', '##fl', '##ood', 'make', '##amo', '##vie', '##la', '##zy', 'my', '##ide', '##ao', '##ff', '##un', '##ny', 'ro', '##hing', '##yas', 'mass', 'killers', 'nobel', 'peace', 'prize', 'amar', '##o']	1432653322659
+['his', '##d', 'reports', 'flooding', 'sw', 'houston', 'crews', 'route', 'hard', 'flooding', 'north', 'forest']	1432653793660
+['jd', '##bn', '##ow', 'mexico', 'tornado', 'texas', 'deadly', 'tornado', 'dev', '##ast', '##ates', 'mexican', 'border', 'town']	1432654310661
+['tx', '##w', '##x', 'hm', '##rd', 'houston', '##ians', 'report', 'damage', 'debris', '311', '71', '##38', '##37', '##0', '##31', '##1', 'app', 'web']	1432654719663
+['houston', '##fl', '##ood', 'brother', 'law', 'sending', 'pictures', 'houston', 'metro', 'bus', 'stuck']	1432655517664
+['tornado', '##watch', 'br', '##esh', '##ay', '##lun', '##a', 'tyler', '##m', '##fu', '##hh', '##hh', 'got', '##em', '##mon', '##lock', 'jumps', 'dirty', 'ass', 'pool', '25']	1432655574663
+['w', '##th', '##r', 'flooding', 'houston', 'today', '12', '##pm']	1432655624663
+['houston', 'houston', '##fl', '##ood', 'downtown', 'flooded', '288']	1432655745665
+['breaking', '##ne', '##ws', 'latest', 'flooding', 'die', 'houston', '##are', '##a', 'flooding', 'washington', 'post']	1432656096657
+['new', '##x', 'flood', 'warning', 'issued', '25', '80', '##6', '##pm', 'cd', '##t', 'notice', 'nw', '##s']	1432656099660
+['tx', '##w', '##x', 'updated', 'flash', 'flood', 'watch', 'fort', 'bend', 'harris', 'counties']	1432656180662
+['houston', '##fl', '##ood', 'k', '##tr', '##kt', '##v', '13th', 'hour', 'live', 'coverage', 'watch']	1432656305659
+['houston', '##fl', '##ood', 'case', 'reminder', 'kids', 'flood', 'waters']	1432656395663
+['storm', '##4', '##art', '##uro', 'zoo', 'water', 'polar', 'bear', 'captivity', 'shame', 'md', '##z', 'zoo']	1432656600662
+['houston', '##fl', '##ood', 'areas', 're', '##lian', '##t', 'stadium', 'completely', 'water']	1432656719666
+['houston', '##fl', '##ood', 'confirmed', 'death', 'sw', 'houston', 'body', 'flooded', 'car']	1432656804664
+['houston', '##fl', '##ood', 'pray', '##fort', '##ex', '##as', 'texas', 'prayers', 'sleep']	1432656962664
+['houston', '##fl', '##ood', 'donkey', '##s', 'parking', 'lot']	1432657414665
+['no', '##bi', '##g', '##de', '##al', 'rockets', '##made', '##it', '##rain', 'houston', '##fl', '##ood', 'kay', '##aking', '288']	1432657664666
+['arabia', 'water', 'des', '##ali', '##ni', '##zation', '_', 'plants', 'river', 'fact', '##14', 'story']	1432657988659
+['houston', '##fl', '##ood', 'prayers', 'h', '##town']	1432658105661
+['houston', '##fl', '##ood', 'k', '##ho', '##u', 'shot', 'flooding', 'inside', 'lower', 'parking', 'level', 'gall', '##eria', 'derrick']	1432658128663
+['houston', '##fl', '##ood', 'isn', '##t', 'bayou', 'memorial', 'drive']	1432658450661
+['houston', '##fl', '##ood', 'gore', 'warn', 'no', '##o']	1432658850658
+['houston', '##fl', '##ood', 'wow', 'gall', '##eria', 'mall', 'parking', 'garage', 'flooding']	1432659306660
+['austin', '##fl', '##ood', 'clean', 'night', 'expecting']	1432659407666
+['houston', '##fl', '##ood', 'houston', '##ians', 'creative', 'ya', '##ll']	1432660551662
+['houston', '##fl', '##ood', 'ho', '##uw', '##x', 'ho', '##une', '##ws', 'click', 'detailed', 'map', 'flooding', 'h', '##town', 'graphic']	1432660955666
+['acres', '##hom', '##e', 'houston', '##fl', '##ood', 'cousin', 'posted']	1432660958666
+['breaking', 'houston', '##fl', '##ood', '5th', 'person', 'confirmed', 'dead', 'result', 'death', 'toll']	1432661037664
+['project', '##ho', '##ust', '##on', 'none']	1432661153657
+['austin', '##met', '##ro', 'austin', '##met', '##ro', '##are', '##a', 'bas', '##tro', '##pc', '##ount', '##y', 'lc', '##ra', 'austin', 'metro', 'area', 'rainfall', '15', 'amp', 'inches', '24', 'hr', '##s']	1432661895666
+['houston', '##fl', '##ood', 'out', '##making', 'ted', 'cruz', 'isn', '##t', 'college', 'pretty', 'excellent']	1432662410666
+['mx', 'mx', '##cana', '##da', 'flood', 'brought']	1432662753661
+['texas', '##fl', '##ood', 'texas', '##weather', '##pro', '##ble', '##ms', 'tc', '##ot', 'p', '##2', 'didn', '##t', 'texas', 'pray', 'rain', 'worked', 'gay', 'people']	1432663723666
+['tucson', 'latest', 'flooding', '30', 'people', 'missing', 'central', 'texas']	1432664591666
+['houston', '##fl', '##ood', 'praying', 'flooding', 'join', 'lifting', 'families', 'response', 'team']	1432665060658
+['at', '##x', '##fl', '##ood', '##s', '123', 'brush', '##y', 'creek', 'wiped', 'boat', 'plays', '##cape', 'top', '##ples', 'vehicle']	1432665206665
+['tx', '##fl', '##ood', 'ct', '##x', '##w', '##x', 'houston', '##fl', '##ood', 'updated', 'map', 'texas']	1432665311663
+['thunder', '##storm', 'down', '##pour', 'rain', 'power', '##cut', 'huddled', '##up', 'mind', 'pu', '##glia', 'tr', '##ull', '##o', 'fi', '##co']	1432666171661
+['ha', '##rring', '##ay', 'green', 'lanes', 'floods']	1432666531659
+['hell', '##storm', 'w', '##w', '##2', '##tr', '##uth', 'impossible', 'overs', '##tate', 'documentary', 'iv', '##e']	1432666660657
+['houston', '##fl', '##ood', 'mas', '##era', '##ti', 'left', 'flooding', 'alabama', 'insurance', 'agent']	1432666798657
+['god', '##list', '##ens', 'continue', 'safe', 'houston', 'praying', 'impacted', 'flooding']	1432667792664
+['houston', '##fl', '##ood', 'h', '##town', 'sw', '##ag', 'saves']	1432667840661
+['jesus', '##standing', '##sti', '##llin', '##thest', '##or', '##m', 'stands', 'speaks', 'wind']	1432668049660
+['wi', '##mber', '##ley', '##fl', '##ood', 'pre', '##s', 'obama', 'declares', 'texas', 'state', 'emergency', 'access', 'federal', 'funds', 'rebuilding']	1432668322665
+['houston', '##fl', '##ood', 'thoughts', 'support', 'relief', 'efforts']	1432668459658
+['forts', '##mith', 'ar', '##w', '##x', 'arkansas', 'river', 'fort', 'smith']	1432668940661
+['houston', '##fl', '##ood', 'crocodile', '##s', 'coming']	1432669182657
+['houston', '##fl', '##ood', 'night', 'worst']	1432669273660
+['ok', '##w', '##x', 'severe', 'thunder', '##storm', 'del', 'city', 'moving', '40', 'mph', 'strong', 'storms', 'extend', 'moore']	1432669378662
+['news', 'bay', '##are', '##a', 'flood', '##water', '##s', 'rise', 'houston', 'search', '30', 'missing']	1432670206658
+['tx', '##w', '##x', 'flood', 'warning', 'sabine', 'san', 'augustine', 'counties']	1432671080664
+['windsor', 'sar', '##nia', 'ck', '##ont', 'on', '##storm', 'map', 'severe', 'ts', '##torm', 'watch', 'issued', 'details']	1432671643661
+['houston', '##fl', '##ood', 'update', 'dead', 'texas', 'ok', '##la', 'floods']	1432671931662
+['waters', 'left', 'car', 'abandoned', 'flood', '26', '42', '##7']	1432672066660
+['houston', '##fl', '##ood', 'photos']	1432672176658
+['flooding', 'check', 'loved', 'houston', 'darling', '##s', 'houston', 'care']	1432672970661
+['pray', '##for', '##ho', '##ust', '##on', 'sense']	1432674082666
+['texas', 'houston', 'storms', 'kill', 'oklahoma', 'including', 'homecoming', 'queen', 'flooded']	1432674412662
+['texas', 'julie', '##shi', '##eld', '##s', 'wi', '##mber', '##ley', '##te', '##xa', '##s', 'young', '##child', '##ren', 'miss', '##in', 'woman', 'calls', 'sis', '##tr', 'amid', 'floods', 'float', '##in', 'house']	1432674445660
+['tornado', '##watch', 'texas', 'tornado', 'as', '##l', 'deaf', 'k', '##x', '##w', '##x', '52', '##6', '##15', 'residents', 'prepare', 'view', 'video', 'h', '##t']	1432674584665
+['houston', '##fl', '##ood', 'sun', 'rises']	1432674935657
+['katrina', 'prayers', 'treacherous', 'floods', 'remember', 'careful']	1432675040658
+['jessie', '##j', 'whitney', '##ho', '##ust', '##on', 'stay', 'arm', 'dear', 'wonderful', '##power', '##ful', 'cover']	1432675254665
+['texas', '##fl', '##ood', '##s', 'extreme', 'flooding', 'texas']	1432675806662
+['houston', '##fl', '##ood', 'praying', 'houston', 'storms', 'texas']	1432676167657
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'wil', '##bar', '##ger', 'county', '51', '##5']	1432676207658
+['houston', '##fl', '##ood', 'aus', '##pol', 'climate', 'change', 'messing']	1432676453660
+['abe', '##rga', '##ven', '##ny', 'water', '##me', '##ado', '##ws', 'river', 'us', '##k']	1432676529662
+['texas', 'houston', '##fl', '##ood', 'texas', '##fl', '##ood', 'halted', 'plans', 'sec', '##ede', 'america', 'federal', 'disaster', 'relief']	1432676658662
+['texas', '##fl', '##ood', 'houston', '##fl', '##ood', 'god', 'pays', 'closer', 'attention']	1432676746657
+['houston', '##fl', '##ood', 'texas', 'deploy', '##s', 'national', 'guard', 'fear', 'obama', 'invasion', 'asks', 'obama', 'amp', 'fe', '##ma', 'invade', 'floods']	1432676858657
+['houston', '##fl', '##ood', 'loved', 'safe', 'registry']	1432676895661
+['houston', '##fl', '##ood', 'a', '##y', '##y', '##y', 'fuck', '##s', 'flood', 'scene', 'buy', 'pool']	1432676913657
+['water', '##town', 'na', '##rca', '##n', '7', '##ne', '##ws', 'firefighters', 'administering', 'amp', 'protecting', 'increased', 'pop', 'pay']	1432677298657
+['buffalo', '##bay', '##ou', 'k', '##ho', '##u', 'houston', '##fl', '##ood', '##ing', 'view', 'air', '##11', '91', '##2', 'inch', 'rain', 'accumulation', '##s', 'saturated', 'grounds']	1432677342660
+['tomorrow', '##sw', '##ea', '##ther', 'scattered', 'thunder', '##storm', '##s', 'tomorrow', 'high', '82', '##f', 'low', '66', '##f']	1432679438661
+['tornado', 'developing', 'cars', 'flipped', 'high', 'winds', 'beaver', '##cre', '##ek', 'ohio', 'photo', 'courtesy', 'jon', 'hale']	1432679442665
+['texas', '##fl', '##ood', 'hearts', 'lost', 'loved', 'remember', 'life', 'fleeting']	1432679658661
+['texas', '##fl', '##ood', '##ing', 'texas', 'flooding', '30', 'people', 'missing', 'dead', 'central', 'texas', 'flooding', 'news', 'cal', '##if', '##o']	1432679857661
+['jd', '##dc', '##i', 'ci', '##v', '##20', '##10', 'go', '##u', '##vc', '##i', 'obama', 'promises', 'quick', 'federal', 'aid', 'texas', 'areas', 'floods']	1432679942658
+['houston', '##weather', 'houston', 'weather', 'live', 'updates', 'massive', 'flooding', 'continues', 'houston', 'freeway', '##s']	1432682350657
+['tucson', 'latest', 'flooding', 'houston', '##are', '##a', 'streams', 'banks']	1432683316665
+['3', '##weather', 'radar', '##gt', 'summit', 'amp', 'stark', 'heavy', 'rain', 'gust', '##y', 'wind', 'moving', 'south', 'north']	1432683472664
+['tx', '##w', '##x', 'tornado', 'warning', 'issued', '26', '63', '##4', '##pm', 'cd', '##t', '26', '64', '##5', '##pm', 'cd', '##t', 'nw', '##s']	1432683784664
+['god', '##isan', '##gr', '##y', 'flood', 'earthquake', 'tornadoes', 'storms', 'global', 'warming', 'divine', 'warning', 'rep', '##ent']	1432683785658
+['blue', '##bell', 'pray', '##fort', '##ex', '##as', 'real']	1432683969660
+['rockets', 'fan', 'stood', 'silent', 'curry', 'standing', 'o', '##vation', 'qb', 'city', 'making', 'joke', 'floods']	1432684295663
+['tornado', 'tx', '##w', '##x', 'rain', 'wrapped', 'app', '##ox', 'miles', 'en', '##e', 'gordon', 'moving', '25', '##mp', '##h', 'seek', 'shelter']	1432684570666
+['help', '##ho', '##ust', '##on', 'houston', '##fl', '##ood', 'dona', '##ting', 'emergency', 'relief']	1432684888661
+['texas', 'oklahoma', '18', 'die', 'storms']	1432685364664
+['tech', 'flood', '##water', '##s', 'deep', '##en', 'houston', 'city', 'rain']	1432686168659
+['eerie', 'storm', 'war', '##oft', '##he', '##world', '##s', 'n', '##b', '##d', 'picture', 'storm']	1432686338660
+['trend', '##ing', 'news', 'ka', '##ep', '##ern', '##ick', 'ins', '##ens', '##itive', 'flooding', 'post', 'ka', '##ep', '##ern', '##ick', 'ins', '##ens', '##itive', 'flooding', 'post']	1432687205659
+['k', '##ho', '##u', '##11', 'houston', '##fl', '##ood', 'picnic', 'table', 'distance', 'amp', 'deck', 'underwater', 'west', 'fork', 'san', 'ja', '##cin', '##to', 'river']	1432688155658
+['ok', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '26', '75', '##6', '##pm', 'cd', '##t', '26', '84', '##5', '##pm', 'cd', '##t', 'nw', '##s']	1432688614659
+['houston', '##fl', '##ood', 'texas', '##fl', '##ood', 'texas', 'disaster', 'recovery', 'per', '##il', 'devastating', 'storms']	1432689578662
+['times', '##to', '##tre', '##as', '##ure', 'baseball', 'mom', 'houston', '##fl', '##ood', 'lets', '##play', '##ball', 'crafts', '##ho', '##ut', 'personal', '##ized', 'ac', '##ryl', '##ic', 'tumble', '##rs', 'mom']	1432689869666
+['ho', '##uf', '##lo', '##ods', 'completed', 'day', 'speaking', 'district', 'terms', 'flooding', 'relief']	1432689977664
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'watch', 'delta', 'denton', 'east', '##land', 'ellis', 'era', '##th', 'counties']	1432694717660
+['texas', 'texas', 'flooding', 'over', '##w', '##helm', '##s', 'popular', 'bed', '##and', '##break', '##fast', 'region']	1432694720664
+['weather', 'storm', 'rochester', 'mi']	1432696162658
+['sky', '##ne', '##ws', 'floods', 'kill', '16', 'texas', 'oklahoma', 'officials', 'death', 'toll', 'rise']	1432696538663
+['100', '##day', '##so', '##fm', '##sg', 'flooded', 't', '##wee', '##ts', 'result', 'trend', '##ing']	1432696915662
+['texas', 'floods', 'protected', 'shouldn', '##t', 'built', 'period', 'exceptions', 'prayers']	1432697214657
+['houston', '##fl', '##ood', 'river', 'highway']	1432702059665
+['houston', '##fl', '##ood', 'homeless', 'texas', '##fl', '##ood', 'houston', 'donations', 'victims', 'food', 'clothes', 'downtown', 'library', '521', 'lamar', '68', '##45', '##p']	1432702348661
+['ok', '##w', '##x', 'strong', 'thunder', '##storm', '##s', 'broken', 'arrow', 'ki', '##efe', '##r', 'moving', 'east', '30', 'mph', 'locations']	1432702412662
+['ok', '##w', '##x', 'lightning', '##st', '##rik', '##es', 'nice', 'light', 'tulsa', 'tonight']	1432704726660
+['ar', '##w', '##x', 'strong', 'thunder', '##storm', '##s', 'miles', 'cherokee', 'city', 'miles', 'sw', 'el', '##don', 'moving', 'east', '25']	1432707729660
+['ok', '##w', '##x', 'strong', 'thunder', '##storm', '##s', 'miles', 'cherokee', 'city', 'miles', 'sw', 'el', '##don', 'moving', 'east', '25']	1432707732663
+['d', '##f', '##w', '##w', '##x', 'ct', '##x', '##w', '##x', 'tx', '##w', '##x', 'awesome', 'lightning', 'fort', 'worth', 'tonight']	1432707908665
+['sbs', '##pop', '##asian', '##adi', '##ne', 'flooding', 'queen']	1432709379665
+['news', 'flood', '##water', '##s', 'deep', '##en', 'houston', 'city', 'rain']	1432718926659
+['ps', '##yang', '##pa', '##gs', '##int', '##a', 'flood', 'kat', '##hs', 'twitter', 'positive']	1432719755659
+['x', '##bb', 'texas', '##fl', '##ood', '##ing', 'texas', 'flooding', 'floods', 'bring', 'death', 'destruction', 'texas']	1432721737666
+['storm', '##12', 'you', '##ve', 'missed', 'hour', 'eye', '##wi', '##tness', 'news', 'rest', 'easy']	1432722247660
+['houston', 'flood', 'weather', '##channel', 'ts', '##torm', '##s', 'heavy', 'rain', 'watch', 'harris', 'bend', '12', '##p']	1432722714661
+['weather', 'weather', 'niagara', 'falls', 'cloudy', '72']	1432723466662
+['houston', 'ho', '##une', '##ws', 'flood', 'raises', 'casket', 'historic', 'southwest', 'houston', 'cemetery', 'cyclist', 'discovery']	1432724121659
+['band', '##to', '##get', '##her', '##t', '##x', 'putting', 'concert', 'flood', 'victim', 'relief', 'conjunction', 'marc', 'san', 'marcos', 'june', '7th', 'marc']	1432724886664
+['k', '##xa', '##n', 'dead', '11', 'missing', 'hays', 'county', 'floods', 'k', '##xa', '##n', 'california', 'usa', 'san', 'francisco', 'usa', '53', '##4']	1432725551658
+['jade', '##helm', '##15', 'texas', 'governor', 'abbot', 'feel', 'floods', 'state', 'obama', '##s', 'weather', 'machine', 'in', '##va']	1432725679657
+['team', '##fo', '##llo', '##w', '##back', 'texas', 'brace', '##s', 'dangerous', 'flash', 'flooding']	1432730931660
+['ks', '##w', '##x', '##link', 'top', '##eka', '80', '##4', '##am', '64', '##f', '67', '##l', '61', 'day', 'time', 'hum', '##7', '##7', 'winds', '##w', '0', '##gt', '##3', '##mp', '##h', 'bar', '##o', '289', '##1', '##in', 'rain', '000', '##in']	1432731903666
+['weather', 'tornado', 'warnings', 'false', 'alarms', 'missing', 'tornadoes']	1432732110657
+['houston', '##fl', '##ood', 'give', '##usa', '##break', 'local', 'weather', 'personalities']	1432733718662
+['wi', '##mber', '##ley', 'sm', '##t', '##x', '##fl', '##ood', 'at', '##x', '##fl', '##ood', '##s', 'text', 'red', '##cross', '90', '##9', '##9', '##9', '10', 'donation', 'disaster', 'relief']	1432733880661
+['storm', '##cha', '##sing', 'texas', 'tornado', 'probable', 'tornado', 'br', '##eck', '##en', '##ridge', 'yesterday']	1432734824658
+['flood', '##ho', '##ust', '##on', 'yesterday', 'versus']	1432734831658
+['texas', '##fl', '##ood', 'pot', '##us', 'pledged', 'victims', 'mind', 'thinks', 'helping', 'israel']	1432735015665
+['blanco', '##river', 'missing', 'texas', 'include', 'members', 'families', 'vacation', 'swept']	1432735060657
+['waterfall', 'check', 'falls', 'bucket', 'list']	1432735951659
+['rain', '##del', '##ay', 'texas', '##fl', '##ood', 'sunglasses', 'co', '##b', '##we', '##bs']	1432737260657
+['tx', '##w', '##x', '52', '##7', '##9', '##7', 'cedar', 'park', 'storm', 'lake', 'travis', 'hit', 'fatal', 'f', '##4', 'tornado', 'story']	1432737557661
+['toronto', 'windsor', 'sar', '##nia', 'ham', '##ont', 'pt', '##bo', 'ld', '##non', '##t', 'barrie', 'on', '##storm', 'severe', 'ts', '##torm', 'watch', 'issued', 'southern', 'including']	1432738866660
+['lei', '##tri', '##m', '3', '##ew', '##ea', '##ther', 'visit', 'beautiful', 'spot', 'glen', '##car', 'waterfall', 'martina', 'morris']	1432738997657
+['texas', '##fl', '##ood', 'texas', 'hand', 'government', 'federal', 'funding', 'h', '##yp', '##oc', '##ris', '##y', 'bigger', 'texas']	1432739341658
+['lightning', 'dallas', 'photo', 'day', 'strikes', 'skyscraper', '##s', 'downtown', 'trinity', 'river']	1432740135660
+['weather', 'southend', '216', '##c', 'wind', '66', '##mp', '##h', 'ss', '##e', '102', '##14', '##hp', '##a', 'falling', 'rain', '00', '##mm', 'forecast', 'un', '##sett', '##led', 'precipitation']	1432740533661
+['novo', '##tell', '##eed', '##s', 'leeds', 'lo', '##vin', '##lee', '##ds', 'lgbt', 'il', '##ove', '##ls', 'booking', '##s', 'flooding', 'meal', 'june']	1432740845664
+['tx', '##w', '##x', 'k', '##xa', '##n', '##weather', 'severe', 'thunder', '##storm', 'warning', 'travis', 'county', '1200', '##pm']	1432743543659
+['the', '##do', '##ctors', 'retro', 'floods', 'yesterday', 'retro', 'channel', 'lost', 'test', 'pattern', 'area', 'optimistic', 'fixed', 'week']	1432744108658
+['breaking', '##ne', '##ws', 'latest', 'flooding', 'longer', 'threat', 'texas', 'dam', 'breaking', '104', '##5']	1432744387659
+['nyc', 'facts', 'tri', '##via', 'hurricane', 'pass', 'directly', '1821', 'high', 'city', 'flooded', 'canal', 'street']	1432745163658
+['houston', '##fl', '##ood', '##ing', 'tx', '##w', '##x', 'follow', 'trusted', 'updates', 'happening', 'list']	1432745396657
+['tx', '##w', '##x', 'tornado', 'warning', 'blanco', 'county', '123', '##0', '##pm']	1432745427658
+['texas', 'point', 'days', 'ago', 'biking', 'floods']	1432747368660
+['tx', '##w', '##x', 'ok', '##w', '##x', '2015', 'wet', '##test', 'month', 'wichita', 'falls', 'previous', 'dry']	1432752354660
+['ms', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '27', '127', '##pm', 'cd', '##t', '27', '215', '##pm', 'cd', '##t', 'nw', '##s']	1432753063661
+['texas', '##fl', '##ood', 'high', 'trinity', 'start', 'eva', '##cu', '##ating', 'prisoners', 'watching', 'water', 'rise']	1432754064657
+['nasa', 'flooding', 'arkansas', 'river']	1432754747666
+['houston', '##fl', '##ood', '10', 'lane', 'freeway', 'downtown', 'river', 'designed', 'protect', 'medical', 'center', 'h', '##tt']	1432755180662
+['tornado', 'watch', '10', '##pm', 'cd', '##t', 'parts', 'ks', 'confirmed', 'tornado', 'yu', '##ma', 'county']	1432755895663
+['ms', '##w', '##x', 'tornado', 'warning', 'issued', '27', '244', '##pm', 'cd', '##t', '27', '315', '##pm', 'cd', '##t', 'nw', '##s']	1432756807659
+['ks', '##w', '##x', 'tornado', 'miles', 'south', 'monument', '13', 'miles', 'sw', 'oakley', 'moving', '15', 'mph', 'hazard', 'large', 'hail', 'source']	1432757112662
+['tornado', '304', '##p', 'rope', 'reported', 'waller', '##ville', '245', 'storm', 'damaging']	1432757113662
+['storm', '##12', 'tornado', 'warning', 'logan', 'county', 'ex', '##pire', '##s', '330']	1432757122658
+['at', '##x', '##fl', '##ood', '##s', 'ho', '##uf', '##lo', '##ods', 'stay', 'strong', 'texas']	1432757767663
+['ld', '##non', '##t', 'on', '##storm', 'am', '##9', '##80', 'lex', '##us', 'london', 'traffic', 'local', 'radar', 'thunder', '##storm', 'tracking', 'area']	1432758145660
+['tx', '##w', '##x', '326', '##pm', 'observed', 'tornado', 'cycling', 'wall', 'cloud', 'check', 'structure']	1432758611658
+['weather', 'nature', 'lent', '##ic', '##ua', '##r', 'clouds', 'texas']	1432759107664
+['clouds', 'rain', 'storm', 'cats', '##kill', '##s', 'clouds', 'woodstock', 'hudson', '##val', '##ley', 'weather', 'none']	1432759716661
+['ms', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'low', '##nde', '##s', 'no', '##x', '##ub', '##ee', 'counties', '430']	1432759823665
+['texas', '##fl', '##ood', 'feels', 'living', 'barr', '##an', '##quil', '##la']	1432760457659
+['ks', '##w', '##x', 'strong', 'thunder', '##storm', 'miles', 'south', 'gr', '##ig', '##ston', 'moving', '20', 'mph', 'large', 'hail', 'wind', 'gust', '##s', '50', '55']	1432760505658
+['cars', 'deals', 'inch', '120', '##w', 'led', 'flood', '##light', 'work', 'light', 'road', 'car', 'driving', 'light', 'boat', 'suv']	1432761368658
+['on', '##storm', 'storm', 'brewing']	1432761493664
+['cars', 'deals', '27', '##w', 'led', 'work', 'flood', 'light', 'road', '12', '##v', '##24', '##v', 'truck', '4', '##x', '##4', 'jeep', 'tractor', 'boat', 'suv']	1432762372662
+['cent', '##ex', '##fl', '##ood', '##s', 'at', '##x', '##fl', '##ood', '##s', 'local', 'restaurants', 'supporting', 'victims', 'respond', '##ers', 'donations', 'food']	1432763012664
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'armstrong', 'carson', 'don', '##ley', 'gray', 'counties', '54', '##5']	1432763416659
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'warning', 'issued', '27', '45', '##3', '##pm', 'cd', '##t', '27', '530', '##pm', 'cd', '##t', 'nw', '##s']	1432764254664
+['ks', '##w', '##x', 'severe', 'thunder', '##storm', '12', 'miles', 'south', 'dig', '##ht', '##on', 'moving', 'east', '20', 'mph', 'hazard', 'large', 'hail', '60', 'mph', 'wind', 'gust', '##s']	1432764435663
+['tx', '##w', '##x', 'severe', 'thunder', '##storm', 'miles', 'south', 'white', 'deer', 'moving', '30', 'mph', 'hazard', 'large', 'hail', 'source', 'radar']	1432764895660
+['pray', '##4', '##ho', '##ust', '##on', 'reuters', '##ne', '##w', 'flood', 'warning', 'houston', 'deadly', 'storms', 'kill']	1432766107659
+['sky', '##pic', 'storm', 'clouds', 'half', 'country', '##lake', '##s', 'work', 'none']	1432766278660
+['pickering', 'on', '##storm', 'storm', 'clouds', 'creeping']	1432766434666
+['tornado', '##tour', 'tornado', 'texas', 'live', 'day', 'usa', 'italy', '##we', 'huge', 'canadian']	1432766828664
+['tulsa', 'ok', '##w', '##x', 'weather', 'storm', 'lo', '##fi', 'stormed', 'night', 'photo']	1432766916664
+['tornado', 'weather', 'nature', '##s', 'violent']	1432767369659
+['ks', '##w', '##x', 'tornado', 'miles', 'sw', 'mod', '##oc', 'moving', 'east', '15', 'mph', 'hazard', 'large', 'hail', 'source', 'radar', 'rotation', 'impact']	1432769311663
+['oak', '##grove', '##weather', 'scattered', 'thunder', '##storm', '##s', 'tomorrow', 'high', '81', '##f', 'low', '66', '##f']	1432769427663
+['ks', '##w', '##x', 'ks', 'severe', 'thunder', '##storm', 'warning', 'issued', '27', '65', '##5', '##pm', 'cd', '##t', '27', '730', '##pm', 'cd', '##t', 'nw', '##s']	1432771385665
+['texas', '##fl', '##ood', '##s', 'rain', 'gods', '##ple', '##ase', 'raining', 'texans', 'ya', '##ll', 'mad', '##than', '##ks', 'jessica', 'bon', '##ill']	1432772114661
+['als', '##har', '##pton', 'shocks', 'question', 'flooding', 'texas']	1432772480665
+['ks', '##w', '##x', 'severe', 'thunder', '##storm', 'miles', 'south', 'ka', '##lves', '##ta', 'moving', 'east', '10', 'mph', 'hazard', '60', 'mph', 'wind', 'gust', '##s', 'large', 'hail']	1432774422666
+['lightning', 'tx', '##w', '##x', 'wow', 'lightning', 'storms', 'tuesday', 'night', 'dallas', 'texas', 'photo', 'credit', 'david', 'de', '##d', '##wyl', '##der']	1432774449665
+['ham', '##ont', 'on', '##storm', 'thought', 'windy', 'today', 'highest', 'gust', 'province', 'recorded', '83', 'km', '##h', '6', '##pm']	1432775320664
+['tx', '##w', '##x', 'monster', 'storm', 'confirmed', 'tornado', 'headed', 'bel', '##ding', 'large', 'hail', 'coming', 'fort', 'stockton']	1432776773657
+['w', '##p', '##xi', '##storm', 'strong', 'storms', '##gus', '##ts', '40', '##mp', '##h', 'heavy', 'rain', 'moving', 'east', 'watch', 'pond', '##ing', 'water', 'roads']	1432778874658
+['heroes', '##oft', '##hes', '##torm', 'heroes', 'team', '##mus', '##t', 'work']	1432783752657
+['houston', '##rock', '##ets', 'harden', 'broke', 'nba', 'record']	1432783761666
+['pray', '##fort', '##ex', '##as', 'continuing', 'pray', 'heart', '##felt', 'prayer', 'texas', 'tonight']	1432786135657
+['houston', '##rock', '##ets', 'ya', '##ll', 'simply', 'talk', 'shit', 'team', 'faced', 'challenges', 'season', 'ended']	1432787785661
+['video', 'tornado', 'canadian', 'texas', 'tx', '##w', '##x', 'texas', '##weather', '27']	1432791303659
+['ok', '##w', '##x', 'strong', 'thunder', '##storm', '##s', 'miles', 'nw', 'ren', '##fr', '##ow', 'lam', '##ont', 'miles', 'west', 'kildare', 'moving']	1432792982660
+['texas', '##fl', '##ood', 'texas']	1432794221659
+['cache', '##cre', '##ek', '##bc', 'flash', 'flood', 'hits', 'cache', 'creek', '82', '##1']	1432795421658
+['texas', 'oklahoma', '35', 'people', 'died', 'severe', 'weather', 'people', 'missing']	1432796695661
+['ok', '##w', '##x', 'severe', 'thunder', '##storm', '##s', 'man', '##gum', 'miles', 'east', 'duke', 'el', '##dora', '##do', 'miles', 'good', '##lett']	1432796806660
+['kent', 'weather', 'average', 'wind', '136', 'mph', 'force', 'bar', '##ometer', '100', '##75', 'mb', 'rising', 'slowly', 'temperature', '186', '##c', 'rain', 'today', '00', 'mm']	1432799653660
+['weather', 'southend', '175', '##c', 'wind', '89', '##mp', '##h', 'w', '##n', '##w', '101', '##55', '##hp', '##a', 'rising', 'slowly', 'rain', '00', '##mm', 'forecast', 'fine', 'weather']	1432800613661
+['houston', '##fl', '##ood', '##ing', 'houston', 'flooding', 'confirmed', 'fatalities', 'remains', 'missing', 'houston']	1432801450666
+['deals', 'cars', 'hot', '10', '##pc', '##s', '27', '##w', '12', '##v', '24', '##v', 'flood', 'lamp', 'driving', 'led', 'work', 'light', 'off', '##ro', '##ad', 'ut', '##e', 'boat']	1432806991657
+['ap', '##10', '##thing', '##s', 'swiss', 'timed', 'fifa', 'raids', 'maximum', 'floods', 'vulnerable', 'houston', 'surprise']	1432808547660
+['tx', '##fl', '##ood', '##s', 'asshole', 'praying', 'rain', 'texas', 'shit']	1432812174660
+['houston', '##fl', '##ood', 'abc', '##13', 'photos', 'damaged', 'save']	1432812295662
+['rain', 'wind', 'lightning', 'oklahoma', '##city', '650', '##act', 'radar', 'h', '##vy', 'gust', '##y', 'amp', 'fr', '##e', '##q', 'continue', 'strong', 'storms', 'shifts']	1432814456663
+['tex', '##oma', '##w', '##x', '630', '##am', 'heavy', 'rain', 'moving', 'i', '##35', 'lead', 'localized', 'flooding', '304', '##0', '##mp', '##h', 'wind', 'gust', '##s']	1432815077659
+['keeping', '##it', '##real', 'texas', '##fl', '##ood', '##ing', 'q', '##ot', '##d', 'climate', 'control', 'gods', 're', '##bu', '##ke', '##cal', '##l', '87', '##75', '##32', '##57', '##9', '##7', 't', '##wee', '##t']	1432815137665
+['per', '##is', '##cope', 'live', 'drive', 'shift', 'f', '##d', 'flood', 'damage', 'watching', 'severe', 'storm']	1432816821663
+['kensington', '##weather', 'always', '##fo', '##llo', '##w', '##back', 'thunder', '##storm', '##s', 'today', 'high', '91', '##f', 'amp', 'low', '68', '##f']	1432818071662
+['houston', '##fl', '##ood', '##ing', 'houston', 'flooding', 'floods', 'compare', 'houston', 'catastrophic', 'rai']	1432820174662
+['flood', 'rain', 'lot', 'warnings', 'plains', 'ready', 'lot', 'today']	1432821091658
+['ar', '##w', '##x', 'arkansas', 'river']	1432821367664
