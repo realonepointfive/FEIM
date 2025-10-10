@@ -19,12 +19,12 @@ def parse_args():
     parser.add_argument('--p', type=float, default='5.5e-6',help='the percentage of remained reachability')
     parser.add_argument('--t', type=int, default='10',help='the number of seed users')
     parser.add_argument('--l', type=int, default='20',help='message limit')
-    parser.add_argument('--sim_num', type=int, default='1000',help='number of mc simulations')
+    parser.add_argument('--sim_num', type=int, default='10000',help='number of mc simulations')
     parser.add_argument('--algo', type=str, default='FEIM')
     parser.add_argument('--data', type=str, default='NepalEQuake')
     parser.add_argument('--start_time', type=str, default='Sat April 25 00:00:00 2015')
     parser.add_argument('--time_signal', type=int, default='1')
-    parser.add_argument('--start_time_format', type=str, default='%a %b %d %H:%M:%S %Y')
+    parser.add_argument('--start_time_format', type=str, default='%a %B %d %H:%M:%S %Y')
     return parser.parse_args()
 
 
@@ -36,7 +36,7 @@ def simandlog(args, folder_path, rr, targets, diff_g, time_cost):
         file.write(str(time_cost))
     
     start_time = time.time()
-    bene, msg, inf, msg_gap = EdgeSelection.EventInfluenceSimulation(args, diff_g, rr, targets)
+    bene, msg, inf, msg_gap, _, _ = EdgeSelection.EventInfluenceSimulation(args, diff_g, rr, targets)
     end_time = time.time()
     diff_cost = (end_time - start_time)/args.sim_num
 
@@ -53,22 +53,12 @@ def simandlog(args, folder_path, rr, targets, diff_g, time_cost):
 def diffusion(args, G):
     start_time = time.time()
     folder_path = args.data_path_prefix.format(args.data) + '/{}/k{}l{}p{}'.format(args.algo, args.t, args.l, args.p)
-    targets, rr = GraphProcessor.ReachableRangeSearch(args, G)
+    targets, rr = GraphProcessor.ReachableRangeSearch(args, G, args.p)
     diff_g = EdgeSelection.FES(rr, targets)
     end_time = time.time()
     time_cost = end_time - start_time
     simandlog(args, folder_path, rr, targets, diff_g, time_cost)
 
-
-def fimm(args, G):
-    start_time = time.time()
-    folder_path = args.data_path_prefix.format(args.data) + '/{}/k{}l{}p{}'.format(args.algo, args.t, args.l, args.p)
-    targets, rr = GraphProcessor.FairIMM(args, G)
-    diff_g = rr
-    end_time = time.time()
-    time_cost = end_time - start_time
-    simandlog(args, folder_path, rr, targets, diff_g, time_cost)
-    
 
 def main(args):
     print(args.data_path_prefix.format(args.data))
@@ -107,7 +97,7 @@ def main(args):
     twelve_hours_in_ms = 12 * 60 * 60 * 1000
     Event_tokens_for_update = []
     
-    with open(args.data_path_prefix + args.SE + args.data_path_suffix, 'r', encoding = 'utf-8') as file:
+    with open(args.data_path_prefix.format(args.data) + args.SE + args.data_path_suffix, 'r', encoding = 'utf-8') as file:
         for line in file:
             token_str, time_str = line.strip().split('\t')
             SE_tokens = ast.literal_eval(token_str)
@@ -133,3 +123,4 @@ def main(args):
 if __name__ == "__main__":
 	args = parse_args()
 	main(args)
+

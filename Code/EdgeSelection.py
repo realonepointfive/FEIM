@@ -63,9 +63,10 @@ def search_cand_edges(flag, cand_nodes, diff_g, rr):
     else:
         cand_edges = []
         for node in cand_nodes:
-            active_neighbors = [neighbor for neighbor in diff_g.predecessors(node) if diff_g.nodes[neighbor]['active']]
-            for active_node in active_neighbors:
-                cand_edges.append((active_node, node))
+            active_neighbors = [neighbor for neighbor in diff_g.predecessors(node) if (diff_g.nodes[neighbor]['active'] and not diff_g.edges[neighbor, node]['abandoned'])]
+            if len(active_neighbors) != 0:
+                chosen_neighbor = random.choice(active_neighbors)
+                cand_edges.append((chosen_neighbor, node))
     return cand_edges
 
 
@@ -109,7 +110,6 @@ def process_edges_batch_numba(edges, edge_probs_array, l):
 
 
 def EventInfluenceSimulation(args, diff_g, rr, seeds):
-        i = 0
         bene = 0
         inf = 0
         msg = 0
@@ -126,7 +126,7 @@ def EventInfluenceSimulation(args, diff_g, rr, seeds):
             x = -14.2400732
             y = -53.1805017
 
-        while(i<args.sim_num):
+        for _ in range(args.sim_num):
             active_node_list = []
             max_bene = 0
             min_bene = args.l
@@ -140,6 +140,9 @@ def EventInfluenceSimulation(args, diff_g, rr, seeds):
 
             for seed in seeds:
                 diff_g.nodes[seed]['active'] = True
+
+            for edge in diff_g.edges():
+                diff_g.edges[edge]['abandoned'] = False
 
             cand_nodes = search_cand_nodes('simulation', diff_g, rr)
 
@@ -167,15 +170,10 @@ def EventInfluenceSimulation(args, diff_g, rr, seeds):
                         if 'x' in rr.nodes[t_node]:
                             dist = haversine(x, y, rr.nodes[t_node]['x'], rr.nodes[t_node]['y'])
                             max_dist = max(dist, max_dist)
-
-                        if args.algo == 'Ori-Random' or args.algo == 'TIM1000' or args.algo == 'Ori-PEI' or args.algo == 'fimmGeo':
-                            if t_node not in active_node_list:
-                                active_node_list.append(t_node)
                     else:
                         diff_g.nodes[t_node]['abandoned'] = True
                 cand_nodes = search_cand_nodes('simulation', diff_g, rr)
 
-            i += 1
             bene_list = []
             for node in diff_g.nodes():
                 if diff_g.nodes[node]['reached']:
@@ -190,9 +188,6 @@ def EventInfluenceSimulation(args, diff_g, rr, seeds):
 
             dist_list.append(max_dist)
 
-              
-            if (i+1) % 100 == 0:
-                print(i)
 
         msg_gap = np.mean(fair_score_list)
         node_num = rr.number_of_nodes() - len(seeds)
@@ -242,3 +237,4 @@ def FES(rr, seeds):
 
         cand_g = update_cand_graph(cand_g, rr, diff_g, g_edge[1])
     return diff_g
+
