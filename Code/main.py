@@ -4,7 +4,7 @@ import networkx as nx
 import random
 import time
 import GraphProcessor
-import EdgeSelection
+import Code.EventAssignment as EventAssignment
 import os
 from datetime import datetime
 random.seed(123)
@@ -36,7 +36,7 @@ def simandlog(args, folder_path, rr, targets, diff_g, time_cost):
         file.write(str(time_cost))
     
     start_time = time.time()
-    bene, msg, inf, msg_gap, _, _ = EdgeSelection.EventInfluenceSimulation(args, diff_g, rr, targets)
+    bene, msg, inf, msg_gap, _, _ = EventAssignment.EventInfluenceSimulation(args, diff_g, rr, targets)
     end_time = time.time()
     diff_cost = (end_time - start_time)/args.sim_num
 
@@ -54,7 +54,7 @@ def diffusion(args, G):
     start_time = time.time()
     folder_path = args.data_path_prefix.format(args.data) + '/{}/k{}l{}p{}'.format(args.algo, args.t, args.l, args.p)
     targets, rr = GraphProcessor.ReachableRangeSearch(args, G, args.p)
-    diff_g = EdgeSelection.FES(rr, targets)
+    diff_g = EventAssignment.FES(rr, targets)
     end_time = time.time()
     time_cost = end_time - start_time
     simandlog(args, folder_path, rr, targets, diff_g, time_cost)
