@@ -35,64 +35,25 @@ def haversine(lat1, lon1, lat2, lon2):
     return distance
 
 
-def search_cand(diff_g, rr):
-    """Return (cand_nodes, cand_edges): nodes reachable from active nodes (not active/abandoned)
-    and all edges from active nodes to those candidates."""
-    cand_nodes = []
-    for node in diff_g.nodes():
-        if diff_g.nodes[node]['active']:
-            for neighbor in diff_g.successors(node):
-                if not (diff_g.nodes[neighbor]['active'] or diff_g.nodes[neighbor]['abandoned']):
-                    cand_nodes.append(neighbor)
-    cand_nodes = list(set(cand_nodes))
+def search_cand(diff_g, l):
+    """
+    Return candidate edges from currently active nodes to neighbors that have
+    received fewer than l sub-events so far, and whose connecting edge has not
+    yet been used to send sub-events.
+    """
     cand_edges = []
-    for node in cand_nodes:
-        for pred in diff_g.predecessors(node):
-            if diff_g.nodes[pred]['active'] and not diff_g.edges[pred, node]['abandoned']:
-                cand_edges.append((pred, node))
-    return cand_nodes, cand_edges
+    for node in diff_g.nodes():
+        if diff_g.nodes[node].get('active'):
+            for neighbor in diff_g.successors(node):
+                if (
+                    diff_g.nodes[neighbor].get('msg_num', 0) < l
+                    and not diff_g.edges[node, neighbor].get('used', False)
+                ):
+                    cand_edges.append((node, neighbor))
+    return cand_edges
 
 
-def update_cand_graph(cand_g, g, diff_g, selected_node):
-    remove_edge_list = list(cand_g.in_edges(selected_node))
-    cand_g.remove_edges_from(remove_edge_list)
-    cand_g.remove_node(selected_node)
-    
-    new_edges = list(g.out_edges(selected_node))
-    for edge in new_edges:
-        t_node = edge[1]
-        if t_node not in diff_g:
-            if t_node not in cand_g:
-                cand_g.add_edge(selected_node, t_node)
-                expected_bene = diff_g.nodes[selected_node]['inf'] * sum(g.edges[edge]['ppd'])
-                cand_g.nodes[t_node]['max_bene'] = expected_bene
-                cand_g.nodes[t_node]['optimal_neighbor'] = selected_node
-            else:
-                cand_g.add_edge(selected_node, t_node)
-                expected_bene = diff_g.nodes[selected_node]['inf'] * sum(g.edges[edge]['ppd'])
-                if expected_bene > cand_g.nodes[t_node]['max_bene']:
-                    cand_g.nodes[t_node]['max_bene'] = expected_bene
-                    cand_g.nodes[t_node]['optimal_neighbor'] = selected_node
-
-    return cand_g
-
-
-'''@numba.jit(nopython=True)
-def process_edges_batch_numba(edges, edge_probs_array, l):
-    """
-    Numba-accelerated batch processing of edges.
-    """
-    results = []
-    for i in range(len(edges)):
-        edge = edges[i]
-        prob = edge_probs_array[i]
-        successes = np.random.uniform(0, 1, l) < prob
-        num_act = np.sum(successes)
-        results.append((edge, num_act))
-    return results'''
-
-
-def EventInfluenceSimulation(args, diff_g, rr, seeds):
+def EventInfluenceSimulation(args, diff_g, seeds):
         bene = 0
         inf = 0
         msg = 0
@@ -116,36 +77,62 @@ def EventInfluenceSimulation(args, diff_g, rr, seeds):
 
             for node in diff_g.nodes():
                 diff_g.nodes[node]['active'] = False
-                diff_g.nodes[node]['abandoned'] = False
                 diff_g.nodes[node]['bene'] = 0
                 diff_g.nodes[node]['reached'] = False
+                diff_g.nodes[node]['msg_num'] = 0
 
             for seed in seeds:
                 diff_g.nodes[seed]['active'] = True
 
+            # Initialize per-edge usage flag: each edge can be used only once
             for edge in diff_g.edges():
-                diff_g.edges[edge]['abandoned'] = False
+                diff_g.edges[edge]['used'] = False
 
-            cand_nodes, g_edges = search_cand(diff_g, rr)
+            g_edges = search_cand(diff_g, args.l)
 
-            while len(cand_nodes):
-                # Group edges by target node so each user gets top-l from all edges from active nodes
+            while len(g_edges):
+                # Group edges by target node so each user gets top-l from all edges from active nodes.
+                # Two cases for each t_node:
+                #   (1) diff_g is original rr: each edge has n sub-events; we select top-l across them.
+                #   (2) diff_g is event-optimized G_prime: each edge has a (possibly different) number
+                #       of assigned sub-events and the total across in_edges is <= l; we just use them.
                 edges_by_target = {}
                 for (s_node, t_node) in g_edges:
                     edges_by_target.setdefault(t_node, []).append((s_node, t_node))
 
                 for t_node, in_edges in edges_by_target.items():
                     diff_g.nodes[t_node]['reached'] = True
-                    # ppd has length n (one prob per sub-event). Per sub-event, take max prob across
-                    # active edges; then propagate only the l distinct sub-events with highest probs.
-                    ppd_stack = np.array([rr.edges[e]['ppd'] for e in in_edges])
-                    n_subevents = ppd_stack.shape[1]
-                    max_per_subevent = np.max(ppd_stack, axis=0)
-                    if n_subevents <= args.l:
-                        top_l_probs = max_per_subevent
+                    # Build per-edge sub-event probability lists
+                    edge_ppds = [np.asarray(diff_g.edges[e]['ppd']) for e in in_edges]
+                    total_len = sum(len(p) for p in edge_ppds)
+
+                    if total_len > args.l:
+                        # Case 1: original rr graph where each edge has the same n sub-events.
+                        # Combine into a matrix and select top-l sub-events across all in-edges.
+                        ppd_stack = np.vstack(edge_ppds)
+                        n_subevents = ppd_stack.shape[1]
+                        max_per_subevent = np.max(ppd_stack, axis=0)
+                        if n_subevents <= args.l:
+                            top_l_probs = max_per_subevent
+                        else:
+                            top_l_idx = np.argsort(max_per_subevent)[-args.l:]
+                            top_l_probs = max_per_subevent[top_l_idx]
                     else:
-                        top_l_idx = np.argsort(max_per_subevent)[-args.l:]
-                        top_l_probs = max_per_subevent[top_l_idx]
+                        # Case 2: event-optimized G_prime where each edge already stores its
+                        # assigned sub-events and the total count across all in-edges is <= l.
+                        # Just use these directly.
+                        if total_len == 0:
+                            top_l_probs = np.array([])
+                        else:
+                            top_l_probs = np.concatenate(edge_ppds)
+
+                    # Mark all incoming edges as used so they won't be selected again
+                    for e in in_edges:
+                        diff_g.edges[e]['used'] = True
+
+                    # Update how many sub-events this node has received so far
+                    diff_g.nodes[t_node]['msg_num'] += len(top_l_probs)
+
                     num_act = np.sum(np.random.uniform(0, 1, len(top_l_probs)) < top_l_probs)
 
                     bene += num_act
@@ -158,13 +145,11 @@ def EventInfluenceSimulation(args, diff_g, rr, seeds):
                         max_bene = max(num_act, max_bene)
                         min_bene = min(num_act, min_bene)
 
-                        if 'x' in rr.nodes[t_node]:
-                            dist = haversine(x, y, rr.nodes[t_node]['x'], rr.nodes[t_node]['y'])
+                        if 'x' in diff_g.nodes[t_node]:
+                            dist = haversine(x, y, diff_g.nodes[t_node]['x'], diff_g.nodes[t_node]['y'])
                             max_dist = max(dist, max_dist)
-                    else:
-                        diff_g.nodes[t_node]['abandoned'] = True
 
-                cand_nodes, g_edges = search_cand(diff_g, rr)
+                g_edges = search_cand(diff_g, args.l)
 
             bene_list = []
             for node in diff_g.nodes():
@@ -182,51 +167,76 @@ def EventInfluenceSimulation(args, diff_g, rr, seeds):
 
 
         msg_gap = np.mean(fair_score_list)
-        node_num = rr.number_of_nodes() - len(seeds)
+        node_num = diff_g.number_of_nodes() - len(seeds)
         ave_dist = np.mean(dist_list)
         return bene, msg, inf, msg_gap, node_num, ave_dist
 
 
+def EventAssignment(args, rr, seeds):
+    """
+    Event Assignment for Event-Optimized Graph (EASoG).
+    Returns event-optimized graph G' with same V, E as G and node attribute 'ap' (activation probability).
+    Inf_dist is taken as edge 'ppd'; sub-event assignment selects top-l sub-events by pp_dist per edge.
+    """
+    # Build G' with same structure as G; use shallow copy if available
+    
+    G_prime = type(rr)()
+    G_prime.add_nodes_from(rr.nodes())
+    G_prime.add_edges_from(rr.edges())
 
-'''def FES(rr, seeds):
-    diff_g = nx.DiGraph()
-    cand_g = nx.DiGraph()
-    for seed in seeds:
-        diff_g.add_node(seed)
-        diff_g.nodes[seed]['inf'] = 1
+    for n in G_prime.nodes():
+        # Initialize activation probability
+        G_prime.nodes[n]['ap'] = 0.0
+        # Copy spatial information from rr if available
+        if 'x' in rr.nodes[n]:
+            G_prime.nodes[n]['x'] = rr.nodes[n]['x']
+        if 'y' in rr.nodes[n]:
+            G_prime.nodes[n]['y'] = rr.nodes[n]['y']
 
-    cand_nodes = search_cand_nodes('selection', diff_g, rr)
-    cand_edges = search_cand_edges('selection', cand_nodes, diff_g, rr)
-    for edge in cand_edges:
-        cand_g.add_edge(edge[0], edge[1])
+    for u, v in G_prime.edges():
+        G_prime.edges[u, v]['ppd'] = []
 
-    for node in cand_g.nodes():
-        if cand_g.in_degree(node)>0:
-            cand_g.nodes[node]['max_bene'] = 0
-            cand_g.nodes[node]['optimal_neighbor'] = None
-            for edge in cand_g.in_edges(node):
-                s_node = edge[0]
-                expected_bene = diff_g.nodes[s_node]['inf'] * sum(rr.edges[s_node, node]['ppd'])
-                if expected_bene > cand_g.nodes[node]['max_bene']:
-                    cand_g.nodes[node]['max_bene'] = expected_bene
-                    cand_g.nodes[node]['optimal_neighbor'] = s_node
+    Vstd = set(seeds)
+    for u in seeds:
+        G_prime.nodes[u]['ap'] = 1.0
 
-    while(cand_g.number_of_edges()):
-        max_margin_score = 0
-        g_edge = None
-        for node in cand_g.nodes():
-            if cand_g.in_degree(node) > 0:
-                margin_score = cand_g.nodes[node]['max_bene']
-                if margin_score > max_margin_score:
-                    g_edge = (cand_g.nodes[node]['optimal_neighbor'], node)
-                max_margin_score = max(margin_score, max_margin_score)
+    DeltaV = set()
+    for u in seeds:
+        for v in rr.successors(u):
+            if v not in Vstd:
+                DeltaV.add(v)
 
-        if g_edge == None:
-            break
-        else:
-            diff_g.add_edge(g_edge[0], g_edge[1])
-            diff_g.nodes[g_edge[1]]['inf'] = diff_g.nodes[g_edge[0]]['inf'] * msg_p(rr.edges[edge]['ppd'])
+    while DeltaV:
+        for v in list(DeltaV):
+            E_vstd = [(u, v) for u in rr.predecessors(v) if u in Vstd]
 
-        cand_g = update_cand_graph(cand_g, rr, diff_g, g_edge[1])
-    return diff_g'''
+            # PPdist(u,v) = ap(u) * ppd(u,v); sub-event assignment: top-l by this distribution
+            ppd_stack = np.array([
+                G_prime.nodes[u]['ap'] * np.asarray(rr.edges[u, v]['ppd'])
+                for (u, v) in E_vstd
+            ])
+            n_subevents = ppd_stack.shape[1]
+            max_per_subevent = np.max(ppd_stack, axis=0)
+            argmax_per_subevent = np.argmax(ppd_stack, axis=0)
+            if n_subevents <= args.l:
+                top_l_idx = np.arange(n_subevents)
+                top_l_probs = max_per_subevent
+            else:
+                top_l_idx = np.argsort(max_per_subevent)[-args.l:]
+                top_l_probs = max_per_subevent[top_l_idx]
+            # Store top-l sub-events on each edge: which sub-events are assigned to this edge and their ppd
+            for i, (u, v) in enumerate(E_vstd):
+                assigned_j = [int(j) for j in top_l_idx if argmax_per_subevent[j] == i]
+                G_prime.edges[u, v]['ppd'] = ppd_stack[i, assigned_j].tolist()
+            # Ensemble activation: ap(v) from assigned top-l sub-events
+            G_prime.nodes[v]['ap'] = msg_p(top_l_probs)
 
+        Vstd |= DeltaV
+        DeltaV_prev = DeltaV
+        DeltaV = set()
+        for u in DeltaV_prev:
+            for v in rr.successors(u):
+                if v not in Vstd:
+                    DeltaV.add(v)
+
+    return G_prime
