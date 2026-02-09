@@ -1,9 +1,6 @@
-# import networkx as nx
 import numpy as np
 import random
-# import numba
 from math import radians, sin, cos, sqrt, atan2
-# import os
 random.seed(123)
 
 
