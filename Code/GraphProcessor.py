@@ -21,7 +21,7 @@ def msg_p(msg_ps):
     return ap
 
 
-def update_r_dict(r_dict, lam, full_size, iteration):
+'''def update_r_dict(r_dict, lam, full_size, iteration):
     kept_num = 0
     if iteration == 1:
         for s_node in r_dict.copy():
@@ -39,6 +39,21 @@ def update_r_dict(r_dict, lam, full_size, iteration):
                     del r_dict[s_node][t_node]
                     removed_num += 1
         loss = removed_num / kept_num
+    return r_dict, loss'''
+
+
+def update_r_dict(r_dict, lam, full_size, iteration):
+    removed_r = 0
+    ori_r = 0
+    
+    for s_node in r_dict.copy():
+        for t_node in r_dict[s_node].copy():
+            ori_r += r_dict[s_node][t_node]
+            if r_dict[s_node][t_node] <= lam:
+                removed_r += r_dict[s_node][t_node]
+                del r_dict[s_node][t_node]
+
+    loss = removed_r / ori_r
     return r_dict, loss
 
 
@@ -60,10 +75,15 @@ def convert_p_to_lam(p, r_dict, n):
 
 
 def rrs_log(args, time, rr=None):
-    folder_path = args.data_path_prefix.format(args.data) + '/{}/k{}l{}p{}'.format(args.algo, args.t, args.l, args.p)
+    folder_path = args.data_path_prefix.format(args.data) + '/RRSp/l{}p{}q{}eps{}'.format(
+        args.l,
+        args.p,
+        format(getattr(args, "hrq", 0.95), "g"),
+        format(getattr(args, "eps", 1e-16), "g"),
+    )
     if time != None:
         os.makedirs(folder_path, exist_ok=True)
-        with open(folder_path + '/RRSpCost_{}.txt'.format(args.time_signal), 'w', encoding = 'utf-8') as file:
+        with open(folder_path + '/Cost_{}.txt'.format(args.time_signal), 'w', encoding = 'utf-8') as file:
             file.write(f"cost\t{time}\n")
             if rr is not None:
                 file.write(f"nodes\t{rr.number_of_nodes()}\n")
@@ -72,13 +92,39 @@ def rrs_log(args, time, rr=None):
                     f"RRSparse time_signal={getattr(args,'time_signal','NA')} "
                     f"range_nodes={rr.number_of_nodes()} range_edges={rr.number_of_edges()}"
                 )
-    if rr is not None:
+    '''if rr is not None:
         with open(folder_path + '/RR_{}.txt'.format(args.time_signal), 'w', encoding='utf-8') as file:
             for u, v in rr.edges():
                 edge_data = rr.edges[u, v]
-                sim_idx = edge_data.get('sim_idx', [])
+                sim_idx = edge_data.get('se_idx', edge_data.get('sim_idx', []))
                 ppd = edge_data.get('ppd', [])
-                file.write(f"{u}\t{v}\t{sim_idx}\t{ppd}\n")
+                file.write(f"{u}\t{v}\t{sim_idx}\t{ppd}\n")'''
+
+
+def _rrs_folder_path(args):
+    return args.data_path_prefix.format(args.data) + '/RRSp/l{}p{}q{}eps{}'.format(
+        args.l,
+        args.p,
+        format(getattr(args, "hrq", 0.95), "g"),
+        format(getattr(args, "eps", 1e-16), "g"),
+    )
+
+
+def _dump_rr_and_seeds(args, k, rr, seeds, elapsed_from_rr_start=None):
+    folder_path = _rrs_folder_path(args)
+    os.makedirs(folder_path, exist_ok=True)
+    with open(os.path.join(folder_path, f"Seeds_{k}.txt"), "w", encoding="utf-8") as f:
+        for s in seeds:
+            f.write(f"{s}\n")
+    with open(os.path.join(folder_path, f"RR_{k}.txt"), "w", encoding="utf-8") as f:
+        for u, v in rr.edges():
+            edge_data = rr.edges[u, v]
+            sim_idx = edge_data.get('se_idx', edge_data.get('sim_idx', []))
+            ppd = edge_data.get('ppd', [])
+            f.write(f"{u}\t{v}\t{sim_idx}\t{ppd}\n")
+    if elapsed_from_rr_start is not None:
+        with open(os.path.join(folder_path, f"RRSeedStoreCost_{args.time_signal}.txt"), "a", encoding="utf-8") as f:
+            f.write(f"k\t{k}\telapsed\t{elapsed_from_rr_start}\n")
 
 
 def information_loss(g, p):
@@ -172,6 +218,7 @@ def ReachableRangeSearch(args, g):
     seeds = []
     seed_start = time.time()
         
+    checkpoints = {5, 10, 15, 20}
     for seed_i in range(args.t):
         best_r = []
         tem_r = set()
@@ -191,6 +238,10 @@ def ReachableRangeSearch(args, g):
         seeds.append(seed)
         r_nodes = r_nodes.union(set(best_r))
         r_size = max(r_size, len(r_nodes))
+        if (seed_i + 1) in checkpoints:
+            remain_nodes = list(r_nodes.union(set(seeds)))
+            rr_snapshot = g.subgraph(remain_nodes)
+            _dump_rr_and_seeds(args, seed_i + 1, rr_snapshot, seeds, elapsed_from_rr_start=(time.time() - start_time))
         elapsed = max(time.time() - seed_start, 1e-9)
         rate = (seed_i + 1) / elapsed
         remain = args.t - (seed_i + 1)
@@ -284,7 +335,8 @@ def RRSparse(args, g):
         remain = max(0, total - done)
         eta = remain / max(rate, 1e-9)
         pct = 100.0 * done / max(total, 1)
-        print(f"RRSparse time_signal={getattr(args,'time_signal','NA')} iter: {done}/{total} ({pct:.1f}%), {rate:.2f} iter/s, ETA {eta:.1f}s")
+        if done == total:
+            print(f"RRSparse time_signal={getattr(args,'time_signal','NA')} iter: {done}/{total} ({pct:.1f}%), {rate:.2f} iter/s, ETA {eta:.1f}s")
         i += 1
 
     covered = np.zeros(n, dtype=bool)
@@ -292,6 +344,7 @@ def RRSparse(args, g):
     seed_idx_set = set()
     seed_start = time.time()
 
+    checkpoints = {5, 10, 15, 20}
     for seed_i in range(args.t):
         best_seed_idx = None
         best_new = -1
@@ -316,6 +369,11 @@ def RRSparse(args, g):
         best_row = cur.getrow(best_seed_idx)
         if best_row.nnz > 0:
             covered[best_row.indices] = True
+        if (seed_i + 1) in checkpoints:
+            covered_nodes = [node_list[i] for i in np.where(covered)[0]]
+            remain_nodes = list(set(covered_nodes).union(set(seeds)))
+            rr_snapshot = g.subgraph(remain_nodes)
+            _dump_rr_and_seeds(args, seed_i + 1, rr_snapshot, seeds, elapsed_from_rr_start=(time.time() - start_time))
         elapsed = max(time.time() - seed_start, 1e-9)
         rate = (seed_i + 1) / elapsed
         remain = args.t - (seed_i + 1)
@@ -333,7 +391,7 @@ def RRSparse(args, g):
     return seeds, rr
 
 
-def EventAssignment(args, rr, seeds):
+def EventAssignment(args, rr, seeds, assign_l=None, log_prefix='EventAssignment'):
     """
     Event Assignment for Event-Optimized Graph (EASoG).
     Returns event-optimized graph G' with same V, E as G and node attribute 'ap' (activation probability).
@@ -356,10 +414,12 @@ def EventAssignment(args, rr, seeds):
 
     for u, v in G_prime.edges():
         G_prime.edges[u, v]['ppd'] = []
-        G_prime.edges[u, v]['sim_idx'] = []
+        G_prime.edges[u, v]['se_idx'] = []
 
     for u in seeds:
         G_prime.nodes[u]['ap'] = 1.0
+
+    assign_l = max(int(args.l if assign_l is None else assign_l), 0)
 
     worklist = deque()
     in_queue = set()
@@ -373,7 +433,7 @@ def EventAssignment(args, rr, seeds):
     assign_start = time.time()
     processed = 0
     max_reprocess = max(rr.number_of_nodes() * 50, 10000)
-    eps = 1e-12
+    eps = float(getattr(args, 'eps', 0))
 
     while worklist:
         v = worklist.popleft()
@@ -382,7 +442,7 @@ def EventAssignment(args, rr, seeds):
 
         if processed > max_reprocess:
             print(
-                f"EventAssignment time_signal={getattr(args,'time_signal','NA')} "
+                f"{log_prefix} time_signal={getattr(args,'time_signal','NA')} "
                 f"stopped at max_reprocess={max_reprocess}"
             )
             break
@@ -393,7 +453,7 @@ def EventAssignment(args, rr, seeds):
         in_edges_all = [(u, v) for u in rr.predecessors(v)]
         for e in in_edges_all:
             G_prime.edges[e]['ppd'] = []
-            G_prime.edges[e]['sim_idx'] = []
+            G_prime.edges[e]['se_idx'] = []
 
         # Only activated predecessors contribute to v.
         E_vstd = [(u, v) for (u, v) in in_edges_all if G_prime.nodes[u].get('ap', 0.0) > 0.0]
@@ -401,13 +461,13 @@ def EventAssignment(args, rr, seeds):
         ap_new = 0.0
 
         if E_vstd:
-            # Unique sub-event assignment by explicit sub-event IDs (sim_idx).
+            # Unique sub-event assignment by explicit sub-event IDs (se_idx).
             # For each sub-event, keep only the best incoming edge (max PPdist).
             best_by_sub = {}  # sub_id -> (best_dist_prob, raw_prob, best_edge)
             for (u, v_edge) in E_vstd:
                 edge_data = rr.edges[u, v_edge]
                 probs = edge_data.get('ppd', [])
-                idxs = edge_data.get('sim_idx', [])
+                idxs = edge_data.get('se_idx', edge_data.get('sim_idx', []))
                 scale = G_prime.nodes[u].get('ap', 0.0)
                 for sub_id, p_raw in zip(idxs, probs):
                     p_dist = scale * p_raw
@@ -415,18 +475,19 @@ def EventAssignment(args, rr, seeds):
                     if prev is None or p_dist > prev[0]:
                         best_by_sub[sub_id] = (p_dist, p_raw, (u, v_edge))
 
+            # Sort by p_dist (the diffusion probability), not raw p.
             ranked = sorted(best_by_sub.items(), key=lambda x: x[1][0], reverse=True)
-            selected = ranked[:max(int(args.l), 0)]
-            top_l_probs = [item[1][0] for item in selected]
+            selected = ranked[:assign_l]
+            top_l_probs = [p_dist for _, (p_dist, _, _) in selected]
 
-            assigned = {e: ([], []) for e in E_vstd}  # edge -> (ppd_list, sim_idx_list)
+            assigned = {e: ([], []) for e in E_vstd}  # edge -> (ppd_list, se_idx_list)
             for sub_id, (_, p_raw, owner_edge) in selected:
                 assigned[owner_edge][0].append(p_raw)
                 assigned[owner_edge][1].append(int(sub_id))
 
             for e in E_vstd:
                 G_prime.edges[e]['ppd'] = assigned[e][0]
-                G_prime.edges[e]['sim_idx'] = assigned[e][1]
+                G_prime.edges[e]['se_idx'] = assigned[e][1]
 
             ap_new = msg_p(top_l_probs)
 
@@ -444,8 +505,10 @@ def EventAssignment(args, rr, seeds):
             elapsed = max(time.time() - assign_start, 1e-9)
             rate = processed / elapsed
             print(
-                f"EventAssignment time_signal={getattr(args,'time_signal','NA')} "
+                f"{log_prefix} time_signal={getattr(args,'time_signal','NA')} "
                 f"processed={processed} queue={len(worklist)} rate={rate:.2f} nodes/s"
             )
 
     return G_prime
+
+
