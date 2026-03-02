@@ -3,6 +3,7 @@ import csv
 import gzip
 import os
 import re
+import ast
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
@@ -102,6 +103,14 @@ class Con4GramModel:
         if m:
             return m.group(1).strip()
         return ""
+
+    def _extract_userid(self, message: str) -> str:
+        m = re.search(r"<userid>\s*(.*?)\s*</userid>", message, re.IGNORECASE)
+        return m.group(1).strip() if m else ""
+
+    def _extract_rtuserid(self, message: str) -> str:
+        m = re.search(r"<rtuserid>\s*(.*?)\s*</rtuserid>", message, re.IGNORECASE)
+        return m.group(1).strip() if m else ""
 
     def _extract_text_content(self, message: str) -> str:
         """
@@ -229,41 +238,61 @@ class Con4GramModel:
 
 
 if __name__ == "__main__":
-    """
-    Train the Con4GramModel on NepalEQuake Msg.txt and:
-      1) Save the trained model to disk
-      2) Transform each message into a concept vector and save to a new txt file
-    """
     # Paths relative to this script (Code directory)
-    concept_json_path = r"..\Data\conceptnet.json"
-    msg_path = r"..\Data\NepalEQuake\Distinct_SE.txt"
-    model_output_path = r"..\Data\NepalEQuake\con4gram_model.pkl"
-    vectors_output_path = r"..\Data\NepalEQuake\SE_concept_vectors.txt"
+    data_name = "WC2014"
+    data_root = os.path.join("..", "Data", data_name)
+    concept_json_path = os.path.join("..", "Data", "conceptnet.json")
+    msg_path = os.path.join(data_root, "msg.txt")
+    se_path = os.path.join(data_root, "Distinct_SE.txt")
+    model_output_path = os.path.join(data_root, "con4gram_model.pkl")
+    msg_vectors_output_path = os.path.join(data_root, "Msg_concept_vectors.txt")
+    se_vectors_output_path = os.path.join(data_root, "SE_concept_vectors.txt")
 
-    # Load raw messages from Msg.txt (one line per message)
     with open(msg_path, "r", encoding="utf-8") as f:
-        corpus = [line.strip() for line in f if line.strip()]
+        msg_corpus = [line.strip() for line in f if line.strip()]
 
-    # Load saved model if it exists; otherwise train and save
     if os.path.exists(model_output_path):
         model = joblib.load(model_output_path)
         print(f"Loaded existing model from {model_output_path}")
     else:
         model = Con4GramModel(concept_json_path, svd_components=50)
-        model.fit(corpus)
+        model.fit(msg_corpus)
         joblib.dump(model, model_output_path)
         print(f"Trained and saved model to {model_output_path}")
 
-    # Transform all messages in one batch (much faster than per-message transform)
-    # Format per line: [v1, v2, ... vK]<TAB>timestamp_ms, matching SE_Tokens.txt layout.
-    vectors = model.transform_batch(corpus, n_jobs=-1)  # shape (n_messages, 50); -1 = all cores
-    with open(vectors_output_path, "w", encoding="utf-8") as out_f:
-        for idx, msg in enumerate(corpus):
+    # 1) Msg_concept_vectors.txt format:
+    #    (userid, rtuserid)\tspace-separated-vector\ttimestamp
+    msg_vectors = model.transform_batch(msg_corpus, n_jobs=-1)
+    with open(msg_vectors_output_path, "w", encoding="utf-8") as out_f:
+        for idx, msg in enumerate(msg_corpus):
+            uid = model._extract_userid(msg)
+            ruid = model._extract_rtuserid(msg)
+            edge = f"({uid}, {ruid})"
             timestamp_ms = model._extract_timestamp_ms(msg)
-            if not timestamp_ms:
-                # Fallback to msgid/index to keep output stable if timestamp is missing.
-                timestamp_ms = model._extract_msg_id(msg) or str(idx)
-            vec_str = "[" + ", ".join(str(x) for x in vectors[idx]) + "]"
-            out_f.write(f"{vec_str}\t{timestamp_ms}\n")
+            vec_str = " ".join(str(float(x)) for x in msg_vectors[idx])
+            out_f.write(f"{edge}\t{vec_str}\t{timestamp_ms}\n")
+    print(f"Saved message concept vectors to {msg_vectors_output_path}")
 
-    print(f"Saved concept vectors to {vectors_output_path}")
+    # 2) SE_concept_vectors.txt format:
+    #    [v1, v2, ...]\ttimestamp
+    se_texts = []
+    se_times = []
+    if not os.path.exists(se_path):
+        raise FileNotFoundError(f"Distinct SE file not found: {se_path}")
+    with open(se_path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            # Keep the full tagged line so SE transformation is identical to Msg:
+            # _get_concept_stream -> _extract_text_content (hashtags + text).
+            se_texts.append(line)
+            timestamp_ms = model._extract_timestamp_ms(line)
+            se_times.append(timestamp_ms)
+
+    se_vectors = model.transform_batch(se_texts, n_jobs=-1)
+    with open(se_vectors_output_path, "w", encoding="utf-8") as out_f:
+        for i in range(len(se_texts)):
+            vec_str = "[" + ", ".join(str(float(x)) for x in se_vectors[i]) + "]"
+            out_f.write(f"{vec_str}\t{se_times[i]}\n")
+    print(f"Saved sub-event concept vectors to {se_vectors_output_path}")

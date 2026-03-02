@@ -167,12 +167,25 @@ def _run_chunk(sim_count, l, x0, y0, base_seed, static, rr_static):
         reached = np.zeros(n_nodes, dtype=bool)
         msg_num = np.zeros(n_nodes, dtype=np.int32)
         node_bene = np.zeros(n_nodes, dtype=np.int32)
+        # Enforce per-user uniqueness across phases: once a sub-event ID has
+        # been delivered to a user, it cannot be delivered again.
+        recv_sub_ids = [set() for _ in range(n_nodes)]
         edge_used = np.zeros(n_edges, dtype=bool)
         rr_edge_used = np.zeros(rr_n_edges, dtype=bool)
 
         if seed_idx.size > 0:
             active[seed_idx] = True
         active_nodes = list(seed_idx)
+
+        def has_unique_sub_event_for_user(eid, is_rr, user_idx):
+            if is_rr:
+                idxs = rr_edge_idxs[eid]
+            else:
+                idxs = edge_idxs[eid]
+            for sub_idx in idxs:
+                if sub_idx not in recv_sub_ids[user_idx]:
+                    return True
+            return False
 
         phase = 'diff'
         while True:
@@ -184,6 +197,8 @@ def _run_chunk(sim_count, l, x0, y0, base_seed, static, rr_static):
                             continue
                         vi = edge_dst[eid]
                         if is_seed[vi] or msg_num[vi] >= l:
+                            continue
+                        if not has_unique_sub_event_for_user(eid, False, vi):
                             continue
                         edges_by_target.setdefault(vi, []).append((eid, False))
 
@@ -199,6 +214,8 @@ def _run_chunk(sim_count, l, x0, y0, base_seed, static, rr_static):
                             pair = edge_pairs[deid]
                             rr_eid = rr_edge_id_by_pair.get(pair)
                             if rr_eid is None or rr_edge_used[rr_eid]:
+                                continue
+                            if not has_unique_sub_event_for_user(rr_eid, True, vi):
                                 continue
                             rr_needed = True
                             break
@@ -219,6 +236,8 @@ def _run_chunk(sim_count, l, x0, y0, base_seed, static, rr_static):
                         rr_eid = rr_edge_id_by_pair.get(pair)
                         if rr_eid is None or rr_edge_used[rr_eid]:
                             continue
+                        if not has_unique_sub_event_for_user(rr_eid, True, vi):
+                            continue
                         edges_by_target.setdefault(vi, []).append((rr_eid, True))
                 if len(edges_by_target) == 0:
                     break
@@ -234,6 +253,8 @@ def _run_chunk(sim_count, l, x0, y0, base_seed, static, rr_static):
                         probs = edge_probs[eid]
                         idxs = edge_idxs[eid]
                     for sub_idx, prob in zip(idxs, probs):
+                        if sub_idx in recv_sub_ids[vi]:
+                            continue
                         prev = subevent_prob.get(sub_idx)
                         if prev is None or prob > prev:
                             subevent_prob[sub_idx] = prob
@@ -241,7 +262,9 @@ def _run_chunk(sim_count, l, x0, y0, base_seed, static, rr_static):
                 remain_cap = int(l - msg_num[vi])
                 if remain_cap > 0 and len(subevent_prob) > 0:
                     ranked = sorted(subevent_prob.items(), key=lambda x: x[1], reverse=True)
-                    selected_probs = np.asarray([x[1] for x in ranked[:remain_cap]], dtype=float)
+                    selected_pairs = ranked[:remain_cap]
+                    selected_probs = np.asarray([x[1] for x in selected_pairs], dtype=float)
+                    recv_sub_ids[vi].update([x[0] for x in selected_pairs])
                 else:
                     selected_probs = np.asarray([], dtype=float)
 
