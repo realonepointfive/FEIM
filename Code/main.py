@@ -99,9 +99,10 @@ def resolve_min_social_update_signal(args):
     if data_key == 'nepalequake':
         return 1
     if data_key == 'texasflood':
-        return 1
+        return 13
     if data_key == 'wc2014':
         return 0
+    return 0
 
 
 def build_experiment_folder(args):
@@ -116,11 +117,10 @@ def build_experiment_folder(args):
 
 
 def build_rrsp_folder(args):
-    return args.data_path_prefix.format(args.data) + '/RRSp/l{}p{}q{}eps{}'.format(
+    return args.data_path_prefix.format(args.data) + '/RRSp/l{}p{}q{}'.format(
         args.l,
         args.p,
         format(getattr(args, "hrq", 0.95), "g"),
-        format(getattr(args, "eps", 1e-16), "g"),
     )
 
 
@@ -131,8 +131,9 @@ def simandlog(args, folder_path, seeds, diff_g, time_cost, rr=None):
     
     start_time = time.time()
     if args.algo == 'TIM':
-        inf, msg, msg_gap = Influence.ICmc(args, diff_g, seeds)
-        bene = inf
+        # inf, msg, msg_gap = Influence.ICmc(args, diff_g, seeds)
+        # bene = inf
+        bene, msg, inf, msg_gap, _, _ = EventInfluence.EventInfluenceSimulation(args, diff_g, seeds, rr=rr)
     else:
         bene, msg, inf, msg_gap, _, _ = EventInfluence.EventInfluenceSimulation(args, diff_g, seeds, rr=rr)
     end_time = time.time()
@@ -174,6 +175,10 @@ def load_rr_and_seeds(folder_path, k, time_signal):
             rr.add_edge(u, v)
             rr.edges[u, v]['se_idx'] = sim_idx
             rr.edges[u, v]['ppd'] = ppd
+    print(
+        f"Loaded RR/Seeds cache at time_signal={time_signal}: "
+        f"seeds={len(seeds)} rr_nodes={rr.number_of_nodes()} rr_edges={rr.number_of_edges()}"
+    )
     return rr, seeds
 
 
@@ -189,20 +194,22 @@ def has_rr_seed_cache(folder_path, k, time_signal):
 def DiffOptim(args, G):
     start_time = time.time()
     folder_path = build_experiment_folder(args)
-    rr_folder = build_rrsp_folder(args)
-    rr, seeds = load_rr_and_seeds(rr_folder, args.t, args.time_signal)
-    if rr is None or seeds is None:
-        if args.algo == 'TIM':
-            seeds, diff_g = GraphProcessor.TIM(args, G)
-        else:
+    rr = None
+    if args.algo == 'TIM':
+        # TIM always constructs its own diffusion graph.
+        seeds, diff_g = GraphProcessor.TIM(args, G)
+    else:
+        rr_folder = build_rrsp_folder(args)
+        rr, seeds = load_rr_and_seeds(rr_folder, args.t, args.time_signal)
+        if rr is None or seeds is None:
             seeds, rr = GraphProcessor.RRSparse(args, G)
-    
-    if args.algo == 'FEIM-NoEA':
-        diff_g = rr.copy()
-    elif args.algo == 'B-PEI':
-        diff_g = GraphProcessor.EdgeSelection(rr, seeds)
-    elif args.algo == 'FEIM':
-        diff_g = GraphProcessor.EventAssignment(args, rr, seeds)
+
+        if args.algo == 'FEIM-NoEA':
+            diff_g = rr.copy()
+        elif args.algo == 'B-PEI':
+            diff_g = GraphProcessor.EdgeSelection(rr, seeds)
+        elif args.algo == 'FEIM':
+            diff_g = GraphProcessor.EventAssignment(args, rr, seeds)
 
     end_time = time.time()
     time_cost = end_time - start_time
@@ -275,10 +282,11 @@ def main(args):
 
     start_time = int(datetime.strptime(args.start_time, args.start_time_format).timestamp() * 1000)
     update_interval_ms = resolve_update_interval_ms(args)
+    min_social_signal = resolve_min_social_update_signal(args)
+    optim_start_signal = max(int(args.start_time_signal), int(min_social_signal))
     event_vectors_for_update = []
 
     if args.algo == 'InfoLoss':
-        min_social_signal = resolve_min_social_update_signal(args)
         print(
             f"InfoLoss mode: applying SocialUpdate cumulatively from signal 0 "
             f"to min_social_signal={min_social_signal}"
@@ -395,7 +403,7 @@ def main(args):
                         )
                         G = EventInfluence.SocialUpdate(args, G, event_vectors_for_update)
                         social_updated_in_flush = True
-                    if current_signal >= args.start_time_signal:
+                    if current_signal >= optim_start_signal:
                         args.time_signal = current_signal
                         DiffOptim(args, G)
                         if args.algo == 'TIM' and social_updated_in_flush:
@@ -436,7 +444,7 @@ def main(args):
             )
             G = EventInfluence.SocialUpdate(args, G, event_vectors_for_update)
             social_updated_in_flush = True
-        if current_signal >= args.start_time_signal:
+        if current_signal >= optim_start_signal:
             args.time_signal = current_signal
             DiffOptim(args, G)
             if args.algo == 'TIM' and social_updated_in_flush:

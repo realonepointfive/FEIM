@@ -3,6 +3,7 @@ import time
 import os
 import heapq
 import numpy as np
+import math
 from collections import deque
 from scipy import sparse as sp
 random.seed(123)
@@ -77,11 +78,10 @@ def convert_p_to_lam(p, r_dict, n):
 
 
 def _rrs_folder_path(args):
-    return args.data_path_prefix.format(args.data) + '/RRSp/l{}p{}q{}eps{}'.format(
+    return args.data_path_prefix.format(args.data) + '/RRSp/l{}p{}q{}'.format(
         args.l,
         args.p,
         format(getattr(args, "hrq", 0.95), "g"),
-        format(getattr(args, "eps", 1e-16), "g"),
     )
 
 
@@ -635,22 +635,20 @@ def TIM(args, rr, num_rr_sets=10000, rng_seed=12345, log_prefix='TIM'):
     return selected, diff_g
 
 
-def EventAssignment(args, rr, seeds, assign_l=None, log_prefix='EventAssignment'):
+def EventAssignment(args, rr, seeds, l=None, log_prefix='EventAssignment'):
     """
     Event Assignment for Event-Optimized Graph (EASoG).
     Returns event-optimized graph G' with same V, E as G and node attribute 'ap' (activation probability).
     Inf_dist is taken as edge 'ppd'; sub-event assignment selects top-l sub-events by pp_dist per edge.
     """
-    # Build G' with same structure as G; use shallow copy if available
-    
+
+    # Build G* with same topology as rr.
     G_prime = type(rr)()
     G_prime.add_nodes_from(rr.nodes())
     G_prime.add_edges_from(rr.edges())
 
     for n in G_prime.nodes():
-        # Initialize activation probability
         G_prime.nodes[n]['ap'] = 0.0
-        # Copy spatial information from rr if available
         if 'x' in rr.nodes[n]:
             G_prime.nodes[n]['x'] = rr.nodes[n]['x']
         if 'y' in rr.nodes[n]:
@@ -660,30 +658,30 @@ def EventAssignment(args, rr, seeds, assign_l=None, log_prefix='EventAssignment'
         G_prime.edges[u, v]['ppd'] = []
         G_prime.edges[u, v]['se_idx'] = []
 
-    for u in seeds:
-        G_prime.nodes[u]['ap'] = 1.0
+    seed_set = {s for s in seeds if s in rr}
+    for s in seed_set:
+        G_prime.nodes[s]['ap'] = 1.0
 
-    assign_l = max(int(args.l if assign_l is None else assign_l), 0)
+    l = max(int(args.l if l is None else l), 0)
+    eps = float(getattr(args, 'eps', 0.0))
 
-    worklist = deque()
-    in_queue = set()
-    for u in seeds:
+    # ap_pre in the pseudo-code.
+    ap_pre = {n: 0.0 for n in G_prime.nodes()}
+
+    # Vstd and ?Vstd initialization.
+    vstd = set(seed_set)
+    delta_vstd = set()
+    for u in seed_set:
         for v in rr.successors(u):
-            if v not in seeds:
-                if v not in in_queue:
-                    worklist.append(v)
-                    in_queue.add(v)
+            if v not in seed_set:
+                delta_vstd.add(v)
 
     assign_start = time.time()
     processed = 0
     max_reprocess = max(rr.number_of_nodes() * 50, 10000)
-    eps = float(getattr(args, 'eps', 0))
 
-    while worklist:
-        v = worklist.popleft()
-        in_queue.discard(v)
-        processed += 1
-
+    while len(delta_vstd) > 0:
+        processed += len(delta_vstd)
         if processed > max_reprocess:
             print(
                 f"{log_prefix} time_signal={getattr(args,'time_signal','NA')} "
@@ -691,66 +689,95 @@ def EventAssignment(args, rr, seeds, assign_l=None, log_prefix='EventAssignment'
             )
             break
 
-        if v in seeds:
-            continue
+        # Round updates before commit:
+        # round_updates[v] = (ap_new, assigned_dict)
+        round_updates = {}
 
-        in_edges_all = [(u, v) for u in rr.predecessors(v)]
-        for e in in_edges_all:
-            G_prime.edges[e]['ppd'] = []
-            G_prime.edges[e]['se_idx'] = []
+        for v in delta_vstd:
+            if v in seed_set:
+                continue
 
-        # Only activated predecessors contribute to v.
-        E_vstd = [(u, v) for (u, v) in in_edges_all if G_prime.nodes[u].get('ap', 0.0) > 0.0]
-        ap_old = G_prime.nodes[v].get('ap', 0.0)
-        ap_new = 0.0
+            in_edges_all = [(u, v) for u in rr.predecessors(v)]
+            E_vstd = [(u, v) for (u, v) in in_edges_all if u in vstd]
 
-        if E_vstd:
-            # Unique sub-event assignment by explicit sub-event IDs (se_idx).
-            # For each sub-event, keep only the best incoming edge (max PPdist).
-            best_by_sub = {}  # sub_id -> (best_dist_prob, raw_prob, best_edge)
-            for (u, v_edge) in E_vstd:
-                edge_data = rr.edges[u, v_edge]
-                probs = edge_data.get('ppd', [])
-                idxs = edge_data.get('se_idx', edge_data.get('sim_idx', []))
-                scale = G_prime.nodes[u].get('ap', 0.0)
-                for sub_id, p_raw in zip(idxs, probs):
-                    p_dist = scale * p_raw
-                    prev = best_by_sub.get(sub_id)
-                    if prev is None or p_dist > prev[0]:
-                        best_by_sub[sub_id] = (p_dist, p_raw, (u, v_edge))
+            ap_new = 0.0
+            assigned = {e: ([], []) for e in E_vstd}
 
-            # Sort by p_dist (the diffusion probability), not raw p.
-            ranked = sorted(best_by_sub.items(), key=lambda x: x[1][0], reverse=True)
-            selected = ranked[:assign_l]
-            top_l_probs = [p_dist for _, (p_dist, _, _) in selected]
+            if E_vstd:
+                # For each sub-event, keep only the best incoming predecessor edge.
+                best_by_sub = {}
+                for (u, v_edge) in E_vstd:
+                    edge_data = rr.edges[u, v_edge]
+                    probs = edge_data.get('ppd', [])
+                    idxs = edge_data.get('se_idx', edge_data.get('sim_idx', []))
+                    scale = G_prime.nodes[u].get('ap', 0.0)
+                    for sub_id, p_raw in zip(idxs, probs):
+                        p_dist = scale * p_raw
+                        prev = best_by_sub.get(sub_id)
+                        if prev is None or p_dist > prev[0]:
+                            best_by_sub[sub_id] = (p_dist, p_raw, (u, v_edge))
 
-            assigned = {e: ([], []) for e in E_vstd}  # edge -> (ppd_list, se_idx_list)
-            for sub_id, (_, p_raw, owner_edge) in selected:
-                assigned[owner_edge][0].append(p_raw)
-                assigned[owner_edge][1].append(int(sub_id))
+                ranked = sorted(best_by_sub.items(), key=lambda x: x[1][0], reverse=True)
 
-            for e in E_vstd:
-                G_prime.edges[e]['ppd'] = assigned[e][0]
-                G_prime.edges[e]['se_idx'] = assigned[e][1]
+                # Adaptive assignment budget per node.
+                no_msg_prob = 1.0
+                for (u, v_edge) in E_vstd:
+                    pred_success = G_prime.nodes[u].get('ap', 0.0)
+                    pred_success = min(max(pred_success, 0.0), 1.0)
+                    no_msg_prob *= (1.0 - pred_success)
+                msg_prob = 1.0 - no_msg_prob
 
-            ap_new = msg_p(top_l_probs)
+                if msg_prob > 0.0 and l > 0:
+                    adaptive_l = min(len(ranked), max(1, math.ceil(l / max(msg_prob, 1e-12))))
+                    selected = ranked[:adaptive_l]
+                else:
+                    selected = []
+                selected = ranked[:l]
 
-        G_prime.nodes[v]['ap'] = ap_new
+                for sub_id, (_, p_raw, owner_edge) in selected:
+                    assigned[owner_edge][0].append(p_raw)
+                    assigned[owner_edge][1].append(int(sub_id))
 
-        if abs(ap_new - ap_old) > eps and ap_new > 0.0:
-            for w in rr.successors(v):
-                if w in seeds:
-                    continue
-                if w not in in_queue:
-                    worklist.append(w)
-                    in_queue.add(w)
+                # Ensemble estimation: ap(v) = 1 - ?_u (1 - ap(u) * p(u->v)).
+                pred_fail_prob = 1.0
+                for (u, v_edge) in E_vstd:
+                    edge_ppd = assigned[(u, v_edge)][0]
+                    edge_success = msg_p(edge_ppd) if len(edge_ppd) > 0 else 0.0
+                    pred_success = G_prime.nodes[u].get('ap', 0.0) * edge_success
+                    pred_success = min(max(pred_success, 0.0), 1.0)
+                    pred_fail_prob *= (1.0 - pred_success)
+                ap_new = 1.0 - pred_fail_prob
 
-        if processed % 2000 == 0 or len(worklist) == 0:
+            round_updates[v] = (ap_new, assigned)
+
+        # Build ?V for next round from nodes with AP improvement > eps.
+        delta_v = set()
+        for v in delta_vstd:
+            if v in seed_set:
+                continue
+            # ap_now = G_prime.nodes[v].get('ap', 0.0)
+            ap_now = round_updates[v][0]
+            if ap_now - ap_pre.get(v) > eps:
+                for w in rr.successors(v):
+                    if w not in seed_set:
+                        delta_v.add(w)
+
+                for (u, v_edge), (ppd_list, idx_list) in round_updates[v][1].items():
+                    G_prime.edges[u, v_edge]['ppd'] = ppd_list
+                    G_prime.edges[u, v_edge]['se_idx'] = idx_list
+
+                G_prime.nodes[v]['ap'] = ap_now
+                ap_pre[v] = ap_now
+
+        vstd = vstd.union(delta_vstd)
+        delta_vstd = delta_v
+
+        if processed % 2000 == 0 or len(delta_vstd) == 0:
             elapsed = max(time.time() - assign_start, 1e-9)
             rate = processed / elapsed
             print(
                 f"{log_prefix} time_signal={getattr(args,'time_signal','NA')} "
-                f"processed={processed} queue={len(worklist)} rate={rate:.2f} nodes/s"
+                f"processed={processed} frontier={len(delta_vstd)} rate={rate:.2f} nodes/s"
             )
 
     return G_prime
