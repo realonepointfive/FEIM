@@ -718,20 +718,6 @@ def EventAssignment(args, rr, seeds, l=None, log_prefix='EventAssignment'):
                             best_by_sub[sub_id] = (p_dist, p_raw, (u, v_edge))
 
                 ranked = sorted(best_by_sub.items(), key=lambda x: x[1][0], reverse=True)
-
-                # Adaptive assignment budget per node.
-                no_msg_prob = 1.0
-                for (u, v_edge) in E_vstd:
-                    pred_success = G_prime.nodes[u].get('ap', 0.0)
-                    pred_success = min(max(pred_success, 0.0), 1.0)
-                    no_msg_prob *= (1.0 - pred_success)
-                msg_prob = 1.0 - no_msg_prob
-
-                if msg_prob > 0.0 and l > 0:
-                    adaptive_l = min(len(ranked), max(1, math.ceil(l / max(msg_prob, 1e-12))))
-                    selected = ranked[:adaptive_l]
-                else:
-                    selected = []
                 selected = ranked[:l]
 
                 for sub_id, (_, p_raw, owner_edge) in selected:
