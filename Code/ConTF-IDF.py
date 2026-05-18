@@ -5,6 +5,7 @@ import os
 import re
 import ast
 import numpy as np
+import argparse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from collections import defaultdict
@@ -15,6 +16,46 @@ try:
     from tqdm import tqdm
 except ImportError:
     tqdm = None  # progress bar optional
+
+
+def load_msg_corpus(data_root, batch_dir=None):
+    """Load message rows from Msg_batches if present, otherwise from Msg.txt.
+
+    Args:
+        data_root: Path to the dataset folder containing Msg.txt and Distinct_SE.txt.
+        batch_dir: Optional explicit path to a directory containing Msg batch files.
+    """
+    if batch_dir is not None:
+        if not os.path.isdir(batch_dir):
+            raise FileNotFoundError(f"Specified Msg batch directory does not exist: {batch_dir}")
+        target_dir = batch_dir
+    else:
+        target_dir = os.path.join(data_root, "Msg_batches")
+
+    if os.path.isdir(target_dir):
+        batch_files = sorted(
+            [os.path.join(target_dir, f) for f in os.listdir(target_dir) if f.lower().endswith('.txt')]
+        )
+        if not batch_files:
+            raise FileNotFoundError(f"Msg_batches directory exists but contains no .txt files: {target_dir}")
+
+        print(f"Loading messages from {len(batch_files)} batch files in {target_dir}")
+        corpus = []
+        for batch_file in batch_files:
+            with open(batch_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        corpus.append(line)
+        return corpus
+
+    msg_file = os.path.join(data_root, "Msg.txt")
+    if not os.path.isfile(msg_file):
+        raise FileNotFoundError(f"No Msg_batches directory or Msg.txt found under {data_root}")
+
+    print(f"Loading messages from single file: {msg_file}")
+    with open(msg_file, 'r', encoding='utf-8') as f:
+        return [line.strip() for line in f if line.strip()]
 
 
 def filter_conceptnet_csv(input_path, output_path):
@@ -237,19 +278,23 @@ class Con4GramModel:
         return self.svd.transform(v_sparse)
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Train ConTF-IDF model and generate message/sub-event concept vectors.")
+    parser.add_argument("--data", type=str, default="WC2014",
+                        help="Dataset subdirectory name under ../Data.")
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    # Paths relative to this script (Code directory)
-    data_name = "WC2014"
-    data_root = os.path.join("..", "Data", data_name)
+    args = parse_args()
+    data_root = os.path.join("..", "Data", args.data)
     concept_json_path = os.path.join("..", "Data", "conceptnet.json")
-    msg_path = os.path.join(data_root, "msg.txt")
     se_path = os.path.join(data_root, "Distinct_SE.txt")
     model_output_path = os.path.join(data_root, "con4gram_model.pkl")
     msg_vectors_output_path = os.path.join(data_root, "Msg_concept_vectors.txt")
     se_vectors_output_path = os.path.join(data_root, "SE_concept_vectors.txt")
 
-    with open(msg_path, "r", encoding="utf-8") as f:
-        msg_corpus = [line.strip() for line in f if line.strip()]
+    msg_corpus = load_msg_corpus(data_root)
 
     if os.path.exists(model_output_path):
         model = joblib.load(model_output_path)
